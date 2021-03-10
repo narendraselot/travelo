@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -37,26 +38,22 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
-
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyAayDcLEEcBmJbrH3ZbzBEQKVB2vVXcNFo",
-            authDomain: "gidctouristguide.firebaseapp.com",
-            projectId: "gidctouristguide",
-            storageBucket: "gidctouristguide.appspot.com",
-            messagingSenderId: "97113204612",
-            appId: "1:97113204612:web:32805840ef567315d9dfd1",
-            measurementId: "G-PWFPWG4PF5"
-        };
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-    </script>
-    <script src="js/indexMain.js"></script>
+    <!-- SweetAlert 2 Files -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -92,14 +89,17 @@
                                         <ul id="navigation">
                                             <li><a class="active" href>home</a></li>
                                             <li><a href="about.html">About</a></li>
+                                            <li id="login"><a style='cursor:pointer' id="btnLogin">Login</a></li>
+                                            <li id="Username" class='invisible'></li>
+                                            <li id="Photo" class='invisible'><img src="" alt="" id="dpPhoto"></li>
                                             <li><a class href="travel_destination.html">Destination</a>
                                             </li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
-                                            </li>
+                                            </li> -->
                                             <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
@@ -140,6 +140,7 @@
             </div>
         </div>
     </header>
+
 
 
     <div class="slider_area">
@@ -931,6 +932,7 @@
 
         gtag('config', 'UA-23581568-13');
     </script>
+    <script src="js/indexMain.js"></script>
 </body>
 
 </html>
