@@ -141,9 +141,11 @@ function signUpGuide() {
             ServiceLocation: "Japan"
         })
         .then((docRef) => {
+            debugger;
             console.log("Document written with ID: ", docRef.id);
         })
         .catch((error) => {
+            debugger;
             console.error("Error adding document: ", error);
         });
 }
