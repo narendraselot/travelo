@@ -132,6 +132,7 @@ function guideSignIn() {
 }
 
 function signUpGuide() {
+    debugger;
     // Add a new document with a generated id.
     db.collection("GuideInfo").add({
             AgencyName: "Nandu",
