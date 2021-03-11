@@ -53,7 +53,6 @@ $(function () {
     });
 });
 
-
 function logout() {
     firebase.auth().signOut();
 }
