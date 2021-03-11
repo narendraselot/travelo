@@ -52,6 +52,14 @@ $(function () {
     $("#btnGuideLogin").on("click", function () {
         guideSignIn();
     });
+
+    $("#btnSubmitGuideDetails").on("click", function () {
+        signUpGuide()
+    })
+    $("#btnCancelGuideDetails").on("click", function () {
+        document.location.href = "/";
+    })
+
 });
 
 function logout() {
@@ -132,20 +140,78 @@ function guideSignIn() {
 }
 
 function signUpGuide() {
-    debugger;
-    // Add a new document with a generated id.
-    db.collection("GuideInfo").add({
-            AgencyName: "Nandu",
-            Contact: "98586994221",
-            Address: "Japan",
-            ServiceLocation: "Japan"
-        })
-        .then((docRef) => {
-            debugger;
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch((error) => {
-            debugger;
-            console.error("Error adding document: ", error);
-        });
+    var userEmail = "";
+    var userNameOfUser = "";
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            userEmail = user.email;
+            userNameOfUser = user.displayName;
+
+            var t_AgencyName = $("#txtAgencyName").val();
+            var t_Contact = $("#txtContact").val();
+            var t_Address = $("#txtAddress").val();
+            var t_ServiceLocation = $("#txtServiceLocation").val();
+            var isError = false;
+            var txtbaseLocation = $("#txtbaseLocation").val();
+
+            var errorMsg = "";
+
+            if (txtbaseLocation == "" || txtbaseLocation == null) {
+                isError = true;
+                errorMsg += " Base Location "
+            }
+            if (t_AgencyName == "" || t_AgencyName == null) {
+                isError = true;
+                errorMsg += " Agency Name "
+            }
+            if (t_Contact == "" || t_Contact == null) {
+                isError = true;
+                errorMsg += "Contact "
+            }
+            if (t_Address == "" || t_Address == null) {
+                isError = true;
+                errorMsg += " Address "
+            }
+            if (t_ServiceLocation == "" || t_ServiceLocation == null) {
+                isError = true;
+                errorMsg += " ServiceLocation "
+            }
+            errorMsg += " is/are compulsory Fields";
+
+            if (isError) {
+                Swal.fire(
+                    'Oops!',
+                    errorMsg,
+                    'error'
+                )
+            } else {
+                // Add a new document with a generated id.
+                db.collection("GuideInfo").doc(txtbaseLocation).set({
+                        AgencyName: t_AgencyName,
+                        Contact: t_Contact,
+                        Address: t_Address,
+                        ServiceLocation: t_ServiceLocation,
+                        guideEmail: userEmail,
+                        GuideName: userNameOfUser
+                    })
+                    .then(() => {
+                        Swal.fire(
+                            'Success!',
+                            'Details Saved',
+                            'success'
+                        )
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
+                    });
+            }
+        } else {
+            Swal.fire(
+                'Oops!',
+                'Please Login',
+                'error'
+            )
+        }
+    });
+
 }
