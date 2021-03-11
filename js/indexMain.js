@@ -11,13 +11,6 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 $(function () {
-    checkLogin();
-    $("#btnLogin").on("click", function () {
-        login();
-    });
-});
-
-function checkLogin() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userEmail = user.email;
@@ -25,7 +18,7 @@ function checkLogin() {
             $("#login").addClass("invisible");
             $("#Username").removeClass("invisible");
             $("#Photo").removeClass("invisible");
-            $("#Username").html(userEmail)
+            $("#Username").html("<a>" + userEmail + "</a>")
             $("#dpPhoto").attr("src", userPhoto);
         } else {
             $("#login").removeClass("invisible");
@@ -35,6 +28,15 @@ function checkLogin() {
             $("#dpPhoto").attr("src", "");
         }
     });
+
+    $("#btnLogin").on("click", function () {
+        login();
+    });
+});
+
+
+function logout() {
+    firebase.auth().signOut();
 }
 
 function login() {
@@ -51,6 +53,7 @@ function login() {
 }
 
 function signInFacebook() {
+    Swal.close();
     var provider = new firebase.auth.FacebookAuthProvider();
     provider.addScope('user_birthday');
     firebase.auth().useDeviceLanguage();
@@ -62,15 +65,12 @@ function signInFacebook() {
             /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
             var user = result.user;
-            debugger;
             if (user) {
                 var userEmail = user.Email;
                 $("#login").addClass("invisible")
                 $("#Username").removeClass("invisible")
                 $("#Photo").removeClass("invisible")
-                //user.photoURL
             }
-
             var accessToken = credential.accessToken;
         })
         .catch((error) => {

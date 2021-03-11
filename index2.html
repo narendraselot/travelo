@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
     <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -37,26 +38,22 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
     <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
-    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
     <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
-
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyAayDcLEEcBmJbrH3ZbzBEQKVB2vVXcNFo",
-            authDomain: "gidctouristguide.firebaseapp.com",
-            projectId: "gidctouristguide",
-            storageBucket: "gidctouristguide.appspot.com",
-            messagingSenderId: "97113204612",
-            appId: "1:97113204612:web:32805840ef567315d9dfd1",
-            measurementId: "G-PWFPWG4PF5"
-        };
-        firebase.initializeApp(firebaseConfig);
-        firebase.analytics();
-    </script>
-    <script src="js/indexMain.js"></script>
+    <!-- SweetAlert 2 Files -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -92,21 +89,26 @@
                                         <ul id="navigation">
                                             <li><a class="active" href>home</a></li>
                                             <li><a href="about.html">About</a></li>
-                                            <li><a class href="travel_destination.html">Destination</a>
+                                            <li><a href="contact.html">Contact</a></li>
+                                            <li id="login"><a style='cursor:pointer' id="btnLogin">Login</a></li>
+                                            <li id="Username" class='invisible'></li>
+                                            <li id="Photo" class='invisible'><img src="" alt="" id="dpPhoto"
+                                                    draggable="false"></li>
+                                            <!-- <li><a class href="travel_destination.html">Destination</a> -->
                                             </li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
-                                            </li>
-                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                            </li> -->
+                                            <!-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            </li> -->
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -116,21 +118,21 @@
                                     <div class="number">
                                         <p> <i class="fa fa-phone"></i> 917854632810</p>
                                     </div>
-                                    <div class="social_links d-none d-xl-block">
+                                    <!-- <div class="social_links d-none d-xl-block">
                                         <ul>
                                             <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
                                             <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
                                             <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
                                             <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
                                         </ul>
-                                    </div>
+                                    </div>   -->
                                 </div>
                             </div>
-                            <div class="seach_icon">
+                            <!-- <div class="seach_icon">
                                 <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
@@ -140,6 +142,7 @@
             </div>
         </div>
     </header>
+
 
 
     <div class="slider_area">
@@ -886,8 +889,6 @@
         </div>
     </div>
 
-
-
     <script src="js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="js/vendor/jquery-1.12.4.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -923,14 +924,7 @@
         });
     </script>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-23581568-13');
-    </script>
+    <script src="js/indexMain.js"></script>
 </body>
 
 </html>
