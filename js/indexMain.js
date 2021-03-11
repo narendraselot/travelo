@@ -44,8 +44,7 @@ function logout() {
 function login() {
     Swal.fire({
         title: 'Login Form',
-        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInFacebook()">Facebook <i class='fa fa-facebook'></i></a>
-        <a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
+        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
         confirmButtonText: 'Sign in',
         showCloseButton: true,
         showCancelButton: true,
