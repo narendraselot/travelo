@@ -9,6 +9,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+var db = firebase.firestore();
 
 $(function () {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -128,4 +129,20 @@ function guideSignIn() {
         showConfirmButton: false,
         focusConfirm: false,
     });
+}
+
+function signUpGuide() {
+    // Add a new document with a generated id.
+    db.collection("GuideInfo").add({
+            AgencyName: "Nandu",
+            Contact: "98586994221",
+            Address: "Japan",
+            ServiceLocation: "Japan"
+        })
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
 }
