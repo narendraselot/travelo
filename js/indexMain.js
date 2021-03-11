@@ -20,19 +20,36 @@ $(function () {
             $("#login").addClass("invisible");
             $("#Username").removeClass("invisible");
             $("#Photo").removeClass("invisible");
+            $("#liLogout").removeClass("invisible");
+            $("#guidelogin").addClass("invisible");
             $("#Username").html("<a>" + userNameOfUser + "</a>")
             $("#dpPhoto").attr("src", userPhoto);
+            var userType = $("#hdnUserType").val();
+
+            if (userType == "guide") {
+                document.location.href = "GuideDetails.html";
+            }
         } else {
             $("#login").removeClass("invisible");
             $("#Username").addClass("invisible");
             $("#Photo").addClass("invisible");
+            $("#guidelogin").removeClass("invisible");
             $("#Username").html("")
             $("#dpPhoto").attr("src", "");
+            $("#liLogout").addClass("invisible");
         }
+    });
+
+    $("#btnLogout").on("click", function () {
+        logout();
     });
 
     $("#btnLogin").on("click", function () {
         login();
+    });
+
+    $("#btnGuideLogin").on("click", function () {
+        guideSignIn();
     });
 });
 
@@ -42,8 +59,9 @@ function logout() {
 }
 
 function login() {
+    $("#hdnUserType").val("user");
     Swal.fire({
-        title: 'Login Form',
+        title: 'Login',
         html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
         confirmButtonText: 'Sign in',
         showCloseButton: true,
@@ -97,4 +115,18 @@ function signInGoogle() {
             var email = error.email;
             var credential = error.credential;
         });
+}
+
+function guideSignIn() {
+    $("#hdnUserType").val("guide");
+    Swal.close();
+    Swal.fire({
+        title: 'Guide Login',
+        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
+        confirmButtonText: 'Sign in',
+        showCloseButton: true,
+        showCancelButton: true,
+        showConfirmButton: false,
+        focusConfirm: false,
+    });
 }
