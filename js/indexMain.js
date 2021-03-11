@@ -60,7 +60,7 @@ function signInFacebook() {
 
     firebase
         .auth()
-        .signInWithPopup(provider)
+        .signInWithRedirect(provider)
         .then((result) => {
             /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
@@ -88,7 +88,7 @@ function signInGoogle() {
         'login_hint': 'user@example.com'
     });
     firebase.auth()
-        .signInWithPopup(provider)
+        .signInWithRedirect(provider)
         .then((result) => {
             /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
