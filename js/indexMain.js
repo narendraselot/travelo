@@ -15,10 +15,12 @@ $(function () {
         if (user) {
             var userEmail = user.email;
             var userPhoto = user.photoURL;
+            var userNameOfUser = user.displayName;
+            var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
             $("#Username").removeClass("invisible");
             $("#Photo").removeClass("invisible");
-            $("#Username").html("<a>" + userEmail + "</a>")
+            $("#Username").html("<a>" + userNameOfUser + "</a>")
             $("#dpPhoto").attr("src", userPhoto);
         } else {
             $("#login").removeClass("invisible");
@@ -42,8 +44,7 @@ function logout() {
 function login() {
     Swal.fire({
         title: 'Login Form',
-        html: `<a id="btnSignInFB" class="genric-btn success radius" style='cursor:pointer' onclick="signInFacebook()">Facebook <i class='fa fa-facebook-square'></i></a>
-        <a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
+        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
         confirmButtonText: 'Sign in',
         showCloseButton: true,
         showCancelButton: true,
@@ -60,7 +61,7 @@ function signInFacebook() {
 
     firebase
         .auth()
-        .signInWithRedirect(provider)
+        .signInWithPopup(provider)
         .then((result) => {
             /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
@@ -88,7 +89,7 @@ function signInGoogle() {
         'login_hint': 'user@example.com'
     });
     firebase.auth()
-        .signInWithRedirect(provider)
+        .signInWithPopup(provider)
         .then((result) => {
             /** @type {firebase.auth.OAuthCredential} */
             var credential = result.credential;
