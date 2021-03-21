@@ -1,0 +1,500 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tourist Guide</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon. png">
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css">
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <!-- SweetAlert 2 Files -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+
+    <style>
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .popular_places_area .single_place .thumb img {
+            width: 350px;
+            height: 250px;
+        }
+
+        .popular_places_area {
+            padding-top: 15px;
+
+        }
+
+        .instagram-sidecar img,
+        .instagram-image img {
+            padding: 7.5px;
+            border-radius: 13px !important;
+            width: 33.33%;
+            overflow: hidden;
+        }
+
+        .nice-select {
+            line-height: 25px;
+            /* outline: none;
+            padding-left: 18px;
+            padding-right: 30px;
+            position: relative;
+            text-align: left !important;
+            -webkit-transition: all .2s ease-in-out;
+            transition: all .2s ease-in-out;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            white-space: nowrap;
+            width: auto; */
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href>
+                                        <script type="text/javascript" style="display:none">
+                                            //<![CDATA[
+                                            window.__mirage2 = { petok: "d332294f8cd1c8388df4dd39ba1e92cf26b0f1af-1614013487-1800" };
+//]]>
+                                        </script>
+                                        <script type="text/javascript"
+                                            src="https://ajax.cloudflare.com/cdn-cgi/scripts/04b3eb47/cloudflare-static/mirage2.min.js"></script>
+                                        <img data-cfsrc="img/TouristLogo.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/TouristLogo.png" alt></noscript>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a class="active" href>home</a></li>
+                                            <li><a href="about.html">About</a></li>
+                                            <!-- #### LogIn FormatMenu START #### -->
+                                            <li id="Username" class='invisible'></li>
+                                            <li id="Photo" class='invisible'>
+                                                <img alt="Profile" height="35px" width='35px' id="dpPhoto">
+                                            </li>
+                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
+                                                    onclick="login()">Login</a></li>
+                                            <li id="guidelogin" class='invisible'>
+                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
+                                                    Guide Login
+                                                </a>
+                                            </li>
+                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
+                                                <a id="btnLogout">Logout</a>
+                                            </li>
+                                            <input type="hidden" id="hdnUserType">
+                                            <!-- #### LogIn FormatMenu STOP #### -->
+                                            <li>
+                                                <a class href="travel_destination.html">Destination</a>
+                                            </li>
+                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="destination_details.html">Destinations details</a></li>
+                                                    <li><a href="elements.html">elements</a></li>
+                                                </ul>
+                                            </li> -->
+                                            <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                                <ul class="submenu">
+                                                    <li><a href="blog.html">blog</a></li>
+                                                    <li><a href="single-blog.html">single-blog</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                                <div class="social_wrap d-flex align-items-center justify-content-end">
+                                    <div class="number">
+                                        <p> <i class="fa fa-phone"></i> 917854632810</p>
+                                    </div>
+                                    <div class="social_links d-none d-xl-block">
+                                        <ul>
+                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-linkedin"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
+                                            <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seach_icon">
+                                <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="popular_places_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Upload Location</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row card-body">
+                <div class="col-lg-4 col-md-6">
+                    <input type="hidden" name="id">
+                    <div class="form-group">
+                        <label class="control-label">Menu Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Menu" id='txtMenu'>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Menu Description</label>
+                        <textarea cols="30" rows="3" class="form-control" name="description" id='txtDesc'></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="status" class="custom-control-input" id="availability" checked>
+                            <label class="custom-control-label" for="availability">Available</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Category </label>
+                        <select name="category_id" id="slctGroupCat" class="custom-select browser-default">
+                            <option value="BestSellers">Best Sellers</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Meals">Meals</option>
+                            <option value="Snacks">Snacks</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Price</label>
+                        <input type="number" class="form-control text-right" name="price" step="any" id='txtPrice'>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="form-group">
+                        <label for="" class="control-label">Image</label>
+                        <input type="file" class="form-control" name="img" id='fileImg'
+                            onchange="displayImg(this,$(this))">
+                    </div>
+                    <div class="form-group">
+                        <img src="" alt="" id="cimg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img data-cfsrc="img/TouristLogo.png" alt
+                                        style="display:none;visibility:hidden;"><noscript><img src="img/TouristLogo.png"
+                                            alt></noscript>
+                                </a>
+                            </div>
+                            <p>2,Sai Charan, Gujarat <br> lane India -91 <br>
+                                <a href="#">+917854632810</a> <br>
+                                <a href="#"><span class="__cf_email__"
+                                        data-cfemail="05666a6b716466714566647775606b7160772b666a68">[email&#160;protected]</span></a>
+                            </p>
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-twitter-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-youtube-play"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Company
+                            </h3>
+                            <ul class="links">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#"> Gallery</a></li>
+                                <li><a href="#"> Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Popular destination
+                            </h3>
+                            <ul class="links double_links">
+                                <li><a href="#">Himachal</a></li>
+                                <li><a href="#">Manali</a></li>
+                                <li><a href="#">Assam</a></li>
+                                <li><a href="#">Shimla</a></li>
+                                <li><a href="#">Kerala</a></li>
+                                <li><a href="#">Kashmir</a></li>
+                                <li><a href="#">Dehradun</a></li>
+                                <li><a href="#">Goa</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Instagram
+                            </h3>
+                            <div class="instagram_feed" id='instagram_feed2'>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+                            Copyright &copy;
+                            <script data-cfasync="false"
+                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                href="https://tripguide.netlify.com" target="_blank">Trip Guide</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="serch_form">
+                    <input type="text" placeholder="Search">
+                    <button type="submit">search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/slick.min.js"></script>
+
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        $('#datepicker').datepicker({
+            iconsLibrary: 'fontawesome',
+            icons: {
+                rightIcon: '<span class="fa fa-caret-down"></span>'
+            }
+        });
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-23581568-13');
+    </script>
+    <script src="js/indexMain.js"></script>
+    <script src="js/jquery.instagramFeed.min.js"></script>
+    <script id="loadInstagram">
+        (function ($) {
+            $(window).on('load', function () {
+                $.instagramFeed({
+                    'tag': 'tripguide',
+                    'container': "#instagram_feed2",
+                    'display_profile': false,
+                    'display_biography': false,
+                    'display_gallery': true,
+                    'display_captions': false,
+                    'max_tries': 8,
+                    'callback': null,
+                    'styling': true,
+                    'items': 6,
+                    'items_per_row': 3,
+                    'margin': 1,
+                    'lazy_load': true,
+                    'on_error': console.error
+                });
+            });
+        })(jQuery);
+    </script>
+
+    <script id="uploadTripLocation">
+        $(function () {
+            document.getElementById("fileImg").onchange = e => {
+                filesArray = e.target.files;
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#cimg').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(filesArray[0]);
+            }
+        });
+        function addMenu() {
+            var menu = document.getElementById("txtMenu").value;
+            var Price = document.getElementById("txtPrice").value;
+            var txtDesc = document.getElementById("txtDesc").value;
+            var AvailCheck = document.getElementById("availability").checked;
+            var availability = "false";
+            if (AvailCheck)
+                availability = "checked";
+            var slctGroupCat = document.getElementById("slctGroupCat").value;
+            var jsonData = {};
+            jsonData.Menu = menu;
+            jsonData.Price = Price;
+            jsonData.Description = txtDesc;
+            jsonData.Availability = availability;
+            jsonData.Category = slctGroupCat;
+            firebase.database().ref('RestrauntMenu/Vadodara').once('value').then((snapshot) => {
+                var data = snapshot.val();
+                if (data) {
+                    if (data.length > 0) {
+                        uploadImageAndData(jsonData, filesArray, data);
+                    } else {
+                        var array = [];
+                        uploadImageAndData(jsonData, filesArray, array);
+                    }
+                } else {
+                    var array = [];
+                    uploadImageAndData(jsonData, filesArray, array);
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

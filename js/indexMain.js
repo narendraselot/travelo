@@ -10,13 +10,21 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var db = firebase.firestore();
-
+firebaseNumberResult = "";
 $(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
+            if (userNameOfUser == null) {
+                userNameOfUser = "New User";
+            }
+            if (userPhoto == null) {
+                userPhoto = "./img/defuser.webp";
+            }
+
+
             var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
             $("#Username").removeClass("invisible");
@@ -59,18 +67,38 @@ $(function () {
     $("#btnCancelGuideDetails").on("click", function () {
         document.location.href = "/";
     })
+    $("#btnSendOTP").on("click", function () {
+        sendOTP();
+    });
+    renderCaptcha();
+
+    $("#btnSignUpUsingNumber").on("click", function () {
+        verifyOTPAndSignIn();
+    });
 
 });
 
+function renderCaptcha() {
+    window.recaptchaVerfier = new firebase.auth.RecaptchaVerifier('captchaContainer');
+
+
+    recaptchaVerfier.render();
+}
+
 function logout() {
     firebase.auth().signOut();
+    setInterval(() => {
+        window.location.href = window.location.href;
+    }, 500);
+
 }
 
 function login() {
     $("#hdnUserType").val("user");
     Swal.fire({
         title: 'Login',
-        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
+        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>` +
+            `<p>or<br><button type='button' class='btn btn-primary' onclick='signInUsingPhoneNumber()'>Sign In Using Phone</button>`,
         confirmButtonText: 'Sign in',
         showCloseButton: true,
         showCancelButton: true,
@@ -214,4 +242,76 @@ function signUpGuide() {
         }
     });
 
+}
+
+function signInUsingPhoneNumber() {
+    Swal.close();
+    $("#divSignInWithNumber").removeClass("invisible");
+}
+
+function sendOTP() {
+    const number = getPhoneNumberFromUserInput();
+    if (number) {
+        firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerfier).then(function (confirmationResult) {
+            window.confirmationResult = confirmationResult;
+            firebaseNumberResult = confirmationResult;
+            console.log(confirmationResult);
+            toast("OTP Sent", "success");
+        }).catch(function (error) {
+            toast(error, "error");
+        });
+    } else {
+        toast("Number cannot be empty", "error");
+    }
+}
+
+function verifyOTPAndSignIn() {
+    const OTP = getOTPUserInput();
+    if (OTP)
+        firebaseNumberResult.confirm(OTP).then(function (result) {
+            toast("Sign In Success", "success");
+
+            var user = result.user;
+            setInterval(() => {
+                window.location.href = window.location.href;
+            }, 500);
+        }).catch(function (error) {
+            toast(error, "error");
+        })
+    else
+        toast("OTP Cannot be empty", "error")
+}
+
+function getPhoneNumberFromUserInput() {
+    if ($("#txtPhoneNumber").val()) {
+        $("#txtPhoneNumber").val($("#txtPhoneNumber").val().replace("+91", ""));
+        return "+91" + $("#txtPhoneNumber").val();
+    } else
+        return null;
+}
+
+function getOTPUserInput() {
+    if ($("#txtOTP").val())
+        return $("#txtOTP").val();
+    else
+        return null;
+}
+
+function toast(msg, icon) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+
+    Toast.fire({
+        icon: icon,
+        title: msg
+    })
 }
