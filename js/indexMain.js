@@ -17,14 +17,23 @@ $(function () {
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
+
+
+            if ($("#txtGuideEmail").length() > 0) {
+                if (userEmail)
+                    $("#txtGuideEmail").val(userEmail);
+            }
+            if ($("#txtGuideName").length() > 0) {
+                if (userNameOfUser)
+                    $("#txtGuideName").val(userNameOfUser);
+            }
+
             if (userNameOfUser == null) {
                 userNameOfUser = "New User";
             }
             if (userPhoto == null) {
                 userPhoto = "./img/defuser.webp";
             }
-
-
             var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
             $("#Username").removeClass("invisible");
@@ -34,7 +43,6 @@ $(function () {
             $("#Username").html("<a>" + userNameOfUser + "</a>")
             $("#dpPhoto").attr("src", userPhoto);
             var userType = $("#hdnUserType").val();
-
             if (userType == "guide") {
                 document.location.href = "GuideDetails.html";
             }
@@ -43,24 +51,20 @@ $(function () {
             $("#Username").addClass("invisible");
             $("#Photo").addClass("invisible");
             $("#guidelogin").removeClass("invisible");
-            $("#Username").html("")
+            $("#Username").html("");
             $("#dpPhoto").attr("src", "");
             $("#liLogout").addClass("invisible");
         }
     });
-
     $("#btnLogout").on("click", function () {
         logout();
     });
-
     $("#btnLogin").on("click", function () {
         login();
     });
-
     $("#btnGuideLogin").on("click", function () {
         guideSignIn();
     });
-
     $("#btnSubmitGuideDetails").on("click", function () {
         signUpGuide()
     })
@@ -70,12 +74,10 @@ $(function () {
     $("#btnSendOTP").on("click", function () {
         sendOTP();
     });
-    renderCaptcha();
-
     $("#btnSignUpUsingNumber").on("click", function () {
         verifyOTPAndSignIn();
     });
-
+    renderCaptcha();
 });
 
 function renderCaptcha() {
@@ -88,9 +90,8 @@ function renderCaptcha() {
 function logout() {
     firebase.auth().signOut();
     setInterval(() => {
-        window.location.href = window.location.href;
+        window.location.href = "index.html";
     }, 500);
-
 }
 
 function login() {
@@ -158,7 +159,8 @@ function guideSignIn() {
     Swal.close();
     Swal.fire({
         title: 'Guide Login',
-        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>`,
+        html: `<a id="btnSignInGoogle" class="genric-btn success radius" style='cursor:pointer' onclick="signInGoogle()">Google <i class='fa fa-google'></i></a>` +
+            `<p>or<br><button type='button' class='btn btn-primary' onclick='signInUsingPhoneNumber()'>Sign In Using Phone</button>`,
         confirmButtonText: 'Sign in',
         showCloseButton: true,
         showCancelButton: true,
@@ -172,16 +174,15 @@ function signUpGuide() {
     var userNameOfUser = "";
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            userEmail = user.email;
-            userNameOfUser = user.displayName;
-
+            var userUID = user.uid;
             var t_AgencyName = $("#txtAgencyName").val();
             var t_Contact = $("#txtContact").val();
             var t_Address = $("#txtAddress").val();
             var t_ServiceLocation = $("#txtServiceLocation").val();
             var isError = false;
             var txtbaseLocation = $("#txtbaseLocation").val();
-
+            userEmail = $("#txtGuideEmail").val();
+            userNameOfUser = $("#txtGuideName").val();
             var errorMsg = "";
 
             if (txtbaseLocation == "" || txtbaseLocation == null) {
@@ -204,8 +205,16 @@ function signUpGuide() {
                 isError = true;
                 errorMsg += " ServiceLocation "
             }
-            errorMsg += " is/are compulsory Fields";
+            if (userEmail == "" || userEmail == null) {
+                isError = true;
+                errorMsg += " Name Of Guide "
+            }
+            if (userNameOfUser == "" || userNameOfUser == null) {
+                isError = true;
+                errorMsg += " User Email "
+            }
 
+            errorMsg += " is/are compulsory Fields";
             if (isError) {
                 Swal.fire(
                     'Oops!',
@@ -213,24 +222,55 @@ function signUpGuide() {
                     'error'
                 )
             } else {
-                // Add a new document with a generated id.
-                db.collection("GuideInfo").doc(txtbaseLocation).set({
-                        AgencyName: t_AgencyName,
-                        Contact: t_Contact,
-                        Address: t_Address,
-                        ServiceLocation: t_ServiceLocation,
-                        guideEmail: userEmail,
-                        GuideName: userNameOfUser
-                    })
-                    .then(() => {
-                        Swal.fire(
-                            'Success!',
-                            'Details Saved',
-                            'success'
-                        )
+                db.collection("GuideInfo").get().then((querySnapshot) => {
+                        var mainCount = true;
+                        var mainData = {};
+                        querySnapshot.forEach((doc) => {
+                            // doc.data() is never undefined for query doc snapshots
+                            //console.log(doc.id, " => ", doc.data());
+                            if (doc.id == txtbaseLocation) {
+                                mainCount = false;
+                                mainData = doc.data();
+                                arrayToSet = mainData.AgencyDetails;
+                                arrayToSet.push({
+                                    AgencyName: t_AgencyName,
+                                    Contact: t_Contact,
+                                    Address: t_Address,
+                                    ServiceLocation: t_ServiceLocation,
+                                    guideEmail: userEmail,
+                                    GuideName: userNameOfUser,
+                                    UID: userUID
+                                })
+                            }
+                        });
+                        if (mainCount) {
+                            arrayToSet = [];
+                            arrayToSet.push({
+                                AgencyName: t_AgencyName,
+                                Contact: t_Contact,
+                                Address: t_Address,
+                                ServiceLocation: t_ServiceLocation,
+                                guideEmail: userEmail,
+                                GuideName: userNameOfUser,
+                                UID: userUID
+                            })
+                            mainData.AgencyDetails = arrayToSet;
+                        }
+                        // Add a new document with a generated id.
+                        db.collection("GuideInfo").doc(txtbaseLocation).set(mainData)
+                            .then(() => {
+                                Swal.fire(
+                                    'Success!',
+                                    'Details Saved',
+                                    'success'
+                                )
+                            })
+                            .catch((error) => {
+                                console.error("Error writing document: ", error);
+                            });
                     })
                     .catch((error) => {
-                        console.error("Error writing document: ", error);
+                        console.log("Error getting documents: ", error);
                     });
             }
         } else {
@@ -241,7 +281,6 @@ function signUpGuide() {
             )
         }
     });
-
 }
 
 function signInUsingPhoneNumber() {
