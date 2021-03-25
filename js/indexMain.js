@@ -74,10 +74,10 @@ $(function () {
     $("#btnSendOTP").on("click", function () {
         sendOTP();
     });
-    renderCaptcha();
     $("#btnSignUpUsingNumber").on("click", function () {
         verifyOTPAndSignIn();
     });
+    renderCaptcha();
 });
 
 function renderCaptcha() {
