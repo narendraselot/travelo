@@ -57,7 +57,6 @@ $(function () {
                             $("#mainForm :input").attr("disabled", false);
                             $("#mainForm :button").attr("disabled", false);
                         }
-
                     });
                     stopLoading();
                 }).catch((error) => {
