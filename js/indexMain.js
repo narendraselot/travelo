@@ -11,26 +11,65 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 var db = firebase.firestore();
 firebaseNumberResult = "";
+
 $(function () {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
-
-
-            if ($("#txtGuideEmail").length() > 0) {
+            var userUID = user.uid;
+            if ($("#txtGuideEmail").length > 0 && $("#txtGuideName").length > 0) {
+                startLoading();
                 if (userEmail)
                     $("#txtGuideEmail").val(userEmail);
-            }
-            if ($("#txtGuideName").length() > 0) {
                 if (userNameOfUser)
                     $("#txtGuideName").val(userNameOfUser);
+                db.collection("GuideInfo").get().then((querySnapshot) => {
+                    var mainData = {};
+                    var foundEntry = false;
+                    var foundData = {};
+                    querySnapshot.forEach((doc) => {
+
+                        // doc.data() is never undefined for query doc snapshots
+                        //console.log(doc.id, " => ", doc.data());
+
+                        mainData = doc.data();
+                        arrayToSet = mainData.AgencyDetails;
+                        for (var i = 0; i < arrayToSet.length; i++) {
+                            if (arrayToSet[i].UID == userUID) {
+                                foundData = arrayToSet[i];
+                                $("#txtAgencyName").val(foundData.AgencyName);
+                                $("#txtContact").val(foundData.Contact);
+                                $("#txtAddress").val(foundData.Address);
+                                $("#txtServiceLocation").val(foundData.ServiceLocation);
+                                $("#txtbaseLocation").val(doc.id);
+                                $("#txtGuideEmail").val(foundData.guideEmail);
+                                $("#txtGuideName").val(foundData.GuideName);
+                                foundEntry = true;
+                                break;
+                            }
+                        }
+                        if (foundEntry) {
+                            $("#mainForm :input").attr("disabled", true);
+                            $("#mainForm :button").attr("disabled", true);
+                        } else {
+                            $("#mainForm :input").attr("disabled", false);
+                            $("#mainForm :button").attr("disabled", false);
+                        }
+
+                    });
+                    stopLoading();
+                }).catch((error) => {
+                    console.log("Error getting documents: ", error);
+                    stopLoading();
+                });
             }
 
             if (userNameOfUser == null) {
                 userNameOfUser = "New User";
             }
+
             if (userPhoto == null) {
                 userPhoto = "./img/defuser.webp";
             }
@@ -40,8 +79,8 @@ $(function () {
             $("#Photo").removeClass("invisible");
             $("#liLogout").removeClass("invisible");
             $("#guidelogin").addClass("invisible");
-            $("#Username").html("<a>" + userNameOfUser + "</a>")
-            $("#dpPhoto").attr("src", userPhoto);
+            $("#Username").html("<a>" + userNameOfUser + "&nbsp;&nbsp;</a>");
+            $("#dpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();
             if (userType == "guide") {
                 document.location.href = "GuideDetails.html";
@@ -67,10 +106,10 @@ $(function () {
     });
     $("#btnSubmitGuideDetails").on("click", function () {
         signUpGuide()
-    })
+    });
     $("#btnCancelGuideDetails").on("click", function () {
         document.location.href = "/";
-    })
+    });
     $("#btnSendOTP").on("click", function () {
         sendOTP();
     });
@@ -170,6 +209,7 @@ function guideSignIn() {
 }
 
 function signUpGuide() {
+    startLoading();
     var userEmail = "";
     var userNameOfUser = "";
     firebase.auth().onAuthStateChanged(function (user) {
@@ -216,22 +256,32 @@ function signUpGuide() {
 
             errorMsg += " is/are compulsory Fields";
             if (isError) {
+                stopLoading();
                 Swal.fire(
                     'Oops!',
                     errorMsg,
                     'error'
                 )
+
             } else {
                 db.collection("GuideInfo").get().then((querySnapshot) => {
-                        var mainCount = true;
-                        var mainData = {};
-                        querySnapshot.forEach((doc) => {
-                            // doc.data() is never undefined for query doc snapshots
-                            //console.log(doc.id, " => ", doc.data());
-                            if (doc.id == txtbaseLocation) {
-                                mainCount = false;
-                                mainData = doc.data();
-                                arrayToSet = mainData.AgencyDetails;
+                    var mainCount = true;
+                    var mainData = {};
+                    var foundEntry = true;
+                    querySnapshot.forEach((doc) => {
+                        // doc.data() is never undefined for query doc snapshots
+                        //console.log(doc.id, " => ", doc.data());
+                        if (doc.id == txtbaseLocation) {
+                            mainCount = false;
+                            mainData = doc.data();
+                            arrayToSet = mainData.AgencyDetails;
+                            for (var i = 0; i < arrayToSet.length; i++) {
+                                if (arrayToSet[i].UID == userUID) {
+                                    foundEntry = false;
+                                    break;
+                                }
+                            }
+                            if (foundEntry)
                                 arrayToSet.push({
                                     AgencyName: t_AgencyName,
                                     Contact: t_Contact,
@@ -240,45 +290,44 @@ function signUpGuide() {
                                     guideEmail: userEmail,
                                     GuideName: userNameOfUser,
                                     UID: userUID
-                                })
-                            }
-                        });
-                        if (mainCount) {
-                            arrayToSet = [];
-                            arrayToSet.push({
-                                AgencyName: t_AgencyName,
-                                Contact: t_Contact,
-                                Address: t_Address,
-                                ServiceLocation: t_ServiceLocation,
-                                guideEmail: userEmail,
-                                GuideName: userNameOfUser,
-                                UID: userUID
-                            })
-                            mainData.AgencyDetails = arrayToSet;
+                                });
+                            else
+                                toast("Data Already Present", "info");
                         }
-                        // Add a new document with a generated id.
-                        db.collection("GuideInfo").doc(txtbaseLocation).set(mainData)
-                            .then(() => {
-                                Swal.fire(
-                                    'Success!',
-                                    'Details Saved',
-                                    'success'
-                                )
-                            })
-                            .catch((error) => {
-                                console.error("Error writing document: ", error);
-                            });
-                    })
-                    .catch((error) => {
-                        console.log("Error getting documents: ", error);
                     });
+                    if (mainCount) {
+                        arrayToSet = [];
+                        arrayToSet.push({
+                            AgencyName: t_AgencyName,
+                            Contact: t_Contact,
+                            Address: t_Address,
+                            ServiceLocation: t_ServiceLocation,
+                            guideEmail: userEmail,
+                            GuideName: userNameOfUser,
+                            UID: userUID
+                        });
+                        mainData.AgencyDetails = arrayToSet;
+                    }
+                    if (foundEntry) {
+                        // Add a new document with a generated id.
+                        db.collection("GuideInfo").doc(txtbaseLocation).set(mainData).then(() => {
+                            stopLoading();
+                            Swal.fire('Success!', 'Details Saved', 'success')
+                            setInterval(() => {
+                                window.location.href = window.location.href;
+                            }, 1000);
+                        }).catch((error) => {
+                            console.error("Error writing document: ", error);
+                            stopLoading();
+                        });
+                    }
+                }).catch((error) => {
+                    stopLoading();
+                    console.log("Error getting documents: ", error);
+                });
             }
         } else {
-            Swal.fire(
-                'Oops!',
-                'Please Login',
-                'error'
-            )
+            Swal.fire('Oops!', 'Please Login', 'error')
         }
     });
 }
@@ -353,4 +402,12 @@ function toast(msg, icon) {
         icon: icon,
         title: msg
     })
+}
+
+function startLoading() {
+    $("#loading").removeClass("invisible");
+}
+
+function stopLoading() {
+    $("#loading").addClass("invisible");
 }
