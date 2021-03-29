@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
 
+
 </head>
 
 <body>
@@ -60,18 +61,31 @@
                                         <ul id="navigation">
                                             <li><a href="index.html">home</a></li>
                                             <li><a href="about.html">About</a></li>
-                                            <li><a class href="travel_destination.html">Destination</a>
+                                            <li><a class href="travel_destination.html">Destination</a> </li>
                                             <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
                                             </li>
-                                            <input type="hidden" id="hdnUserType">
+                                            <!-- #### LogIn FormatMenu START #### -->
                                             <li id="Username" class='invisible'></li>
-                                            <li id="Photo" class='invisible'><img src="" height="35px" width='35px'
-                                                    alt="" id="dpPhoto" draggable="false"></li>
+                                            <li id="Photo" class='invisible'>
+                                                <img alt="Profile" height="35px" width='35px' id="dpPhoto">
                                             </li>
+                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
+                                                    onclick="login()">Login</a>
+                                            </li>
+                                            <li id="guidelogin" class='invisible'>
+                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
+                                                    Guide Login
+                                                </a>
+                                            </li>
+                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
+                                                <a id="btnLogout">Logout</a>
+                                            </li>
+                                            <!-- #### LogIn FormatMenu STOP #### -->
+
                                             <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
@@ -84,22 +98,7 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
-                                    <!-- #### LogIn FormatMenu START #### -->
-                                    <li id="Username" class='invisible'></li>
-                                    <li id="Photo" class='invisible'>
-                                        <img alt="Profile" height="35px" width='35px' id="dpPhoto">
-                                    </li>
-                                    <li id="login"><a style='cursor:pointer' id="btnLogin" onclick="login()">Login</a>
-                                    </li>
-                                    <li id="guidelogin" class='invisible'>
-                                        <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
-                                            Guide Login
-                                        </a>
-                                    </li>
-                                    <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                        <a id="btnLogout">Logout</a>
-                                    </li>
-                                    <!-- #### LogIn FormatMenu STOP #### -->
+
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
                                             <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
@@ -229,7 +228,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Udaipur">
                                         <h3>Udaipur</h3>
                                     </a>
                                     <p>India</p>
@@ -259,7 +258,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Delhi">
                                         <h3>Delhi</h3>
                                     </a>
                                     <p>India</p>
@@ -289,7 +288,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Lonavala">
                                         <h3>Lonavala</h3>
                                     </a>
                                     <p>India</p>
@@ -319,7 +318,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Pondichery">
                                         <h3>Pondicherry</h3>
                                     </a>
                                     <p>India</p>
@@ -349,7 +348,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Rishikesh">
                                         <h3>Rishikesh</h3>
                                     </a>
                                     <p>India</p>
@@ -379,7 +378,7 @@
                                     <a href="#" class="prise"></a>
                                 </div>
                                 <div class="place_info">
-                                    <a href="destination_details.html">
+                                    <a href="destination_details.html?loc=Shimla">
                                         <h3>Shimla</h3>
                                     </a>
                                     <p>India</p>
