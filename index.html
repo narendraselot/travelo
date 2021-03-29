@@ -89,16 +89,28 @@
                                         <ul id="navigation">
                                             <li><a class="active" href>home</a></li>
                                             <li><a href="about.html">About</a></li>
-
                                             <li>
                                                 <a class href="travel_destination.html">Destination</a>
                                             </li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="destination_details.html">Destinations details</a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                                </ul>
+                                            <!-- #### LogIn FormatMenu START #### -->
+                                            <li id="Username" class='invisible'></li>
+                                            <li id="Photo" class='invisible'>
+                                                <img alt="Profile" height="35px" width='35px' id="dpPhoto">
                                             </li>
+                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
+                                                    onclick="login()">Login
+                                                    &nbsp;&nbsp;</a>
+                                            </li>
+                                            <li id="guidelogin" class='invisible'>
+                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
+                                                    Guide&nbsp;Login &nbsp;
+                                                </a>
+                                            </li>
+                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
+                                                <a id="btnLogout">Logout</a>
+                                            </li>
+                                            <input type="hidden" id="hdnUserType">
+                                            <!-- #### LogIn FormatMenu STOP #### -->
 
                                             <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
@@ -112,25 +124,6 @@
                             </div>
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
                                 <div class="social_wrap d-flex align-items-center justify-content-end">
-
-                                    <!-- #### LogIn FormatMenu START #### -->
-                                    <li id="Username" class='invisible'></li>
-                                    <li id="Photo" class='invisible'>
-                                        <img alt="Profile" height="35px" width='35px' id="dpPhoto">
-                                    </li>
-                                    <li id="login"><a style='cursor:pointer' id="btnLogin" onclick="login()">Login
-                                            &nbsp;&nbsp;</a>
-                                    </li>
-                                    <li id="guidelogin" class='invisible'>
-                                        <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
-                                            Guide&nbsp;Login &nbsp;
-                                        </a>
-                                    </li>
-                                    <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                        <a id="btnLogout">Logout</a>
-                                    </li>
-                                    <input type="hidden" id="hdnUserType">
-                                    <!-- #### LogIn FormatMenu STOP #### -->
                                     <div class="social_links d-none d-xl-block">
                                         <ul>
                                             <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
@@ -144,7 +137,30 @@
                                 </a>
                             </div>
                             <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
+                                <div class="mobile_menu d-block d-lg-none">
+                                    <li><a class="active" href>home</a></li>
+                                    <li><a href="about.html">About</a></li>
+                                    <li>
+                                        <a class href="travel_destination.html">Destination</a>
+                                    </li>
+                                    <!-- #### LogIn FormatMenu START #### -->
+                                    <li id="MobUsername" class='invisible'></li>
+                                    <li id="MobPhoto" class='invisible'>
+                                        <img alt="Profile" height="35px" width='35px' id="MobdpPhoto">
+                                    </li>
+                                    <li id="login"><a style='cursor:pointer' id="MobbtnLogin" onclick="login()">Login
+                                            &nbsp;&nbsp;</a>
+                                    </li>
+                                    <li id="Mobguidelogin" class='invisible'>
+                                        <a style='cursor:pointer' id="MobbtnGuideLogin" onclick="guideSignIn()">
+                                            Guide&nbsp;Login &nbsp;
+                                        </a>
+                                    </li>
+                                    <li id="MobliLogout" class='invisible' style='cursor:pointer'>
+                                        <a id="MobbtnLogout">Logout</a>
+                                    </li>
+                                    <input type="hidden" id="MobhdnUserType">
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -74,24 +74,38 @@ $(function () {
             }
             var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
+            $("#Moblogin").addClass("invisible");
             $("#Username").removeClass("invisible");
+            $("#MobUsername").removeClass("invisible");
             $("#Photo").removeClass("invisible");
+            $("#MobPhoto").removeClass("invisible");
             $("#liLogout").removeClass("invisible");
+            $("#MobliLogout").removeClass("invisible");
             $("#guidelogin").addClass("invisible");
+            $("#Mobguidelogin").addClass("invisible");
             $("#Username").html("<a>" + userNameOfUser + "&nbsp;&nbsp;</a>");
+            $("#MobUsername").html("<a>" + userNameOfUser + "&nbsp;&nbsp;</a>");
             $("#dpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
+            $("#MobdpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();
             if (userType == "guide") {
                 document.location.href = "GuideDetails.html";
             }
         } else {
             $("#login").removeClass("invisible");
+            $("#Moblogin").removeClass("invisible");
             $("#Username").addClass("invisible");
+            $("#MobUsername").addClass("invisible");
             $("#Photo").addClass("invisible");
+            $("#MobPhoto").addClass("invisible");
             $("#guidelogin").removeClass("invisible");
+            $("#Mobguidelogin").removeClass("invisible");
             $("#Username").html("");
+            $("#MobUsername").html("");
             $("#dpPhoto").attr("src", "");
+            $("#MobdpPhoto").attr("src", "");
             $("#liLogout").addClass("invisible");
+            $("#MobliLogout").addClass("invisible");
         }
     });
     $("#btnLogout").on("click", function () {
@@ -100,7 +114,13 @@ $(function () {
     $("#btnLogin").on("click", function () {
         login();
     });
+    $("#MobbtnLogin").on("click", function () {
+        login();
+    });
     $("#btnGuideLogin").on("click", function () {
+        guideSignIn();
+    });
+    $("#MobbtnGuideLogin").on("click", function () {
         guideSignIn();
     });
     $("#btnSubmitGuideDetails").on("click", function () {
@@ -159,9 +179,12 @@ function signInFacebook() {
             var user = result.user;
             if (user) {
                 var userEmail = user.Email;
-                $("#login").addClass("invisible")
-                $("#Username").removeClass("invisible")
-                $("#Photo").removeClass("invisible")
+                $("#login").addClass("invisible");
+                $("#Moblogin").addClass("invisible");
+                $("#Username").removeClass("invisible");
+                $("#MobUsername").removeClass("invisible");
+                $("#Photo").removeClass("invisible");
+                $("#MobPhoto").removeClass("invisible");
             }
             var accessToken = credential.accessToken;
         })
