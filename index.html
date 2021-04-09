@@ -874,49 +874,7 @@
                             <h3 class="footer_title">
                                 Instagram
                             </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/1.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/1.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/2.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/2.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/3.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/3.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/4.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/4.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/5.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/5.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/6.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/6.png" alt></noscript>
-                                    </a>
-                                </div>
+                            <div class="instagram_feed" id='instagram_feed2'>
                             </div>
                         </div>
                     </div>
@@ -984,6 +942,31 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/indexMain.js"></script>
+    <script src="js/jquery.instagramFeed.min.js"></script>
+    <script id="loadInstagram">
+        (function ($) {
+            $(window).on('load', function () {
+                $.instagramFeed({
+                    'username': 'touristguide2021',
+                    'container': "#instagram_feed2",
+                    'display_profile': false,
+                    'display_biography': false,
+                    'display_gallery': true,
+                    'display_captions': false,
+                    'max_tries': 8,
+                    'callback': null,
+                    'styling': true,
+                    'items': 6,
+                    'items_per_row': 3,
+                    'margin': 1,
+                    'lazy_load': true,
+                    'on_error': console.error
+                });
+            });
+        })(jQuery);
+    </script>
+
     <script>
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
@@ -1003,7 +986,7 @@
     </script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-    <script src="js/indexMain.js"></script>
+    
 </body>
 
 </html>
