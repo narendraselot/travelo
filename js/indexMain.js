@@ -13,6 +13,7 @@ var db = firebase.firestore();
 firebaseNumberResult = "";
 
 $(function () {
+    $("#txtLocationLatLong").val("");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             var userEmail = user.email;
@@ -142,27 +143,47 @@ $(function () {
         var tagID = $(this).attr("id");
         autoAddCities(tagID, city)
     });
+
+
+    $("#btnLocationSearchOnMap").on("click", function () {
+        // toast($("#txtLocationLatLong").val(), "info");
+        if ($("#txtLocationLatLong").val())
+            searchUsingLatLon();
+        else
+            toast("Oops, Please select a valid Location", "info");
+    });
 });
 
+function searchUsingLatLon() {
+    $("#iframeLocation").removeClass("invisible");
+    $("#iframeLocation").html('<iframe src="http://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
+}
+
 function autoAddCities(tag, city) {
+    $("#txtLocationLatLong").val("");
+    $("#iframeLocation").html(null);
+    $("#iframeLocation").addClass("invisible");
     $("#" + tag).autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "http://autocomplete.travelpayouts.com/places2?term=" + city + "&locale=en&types[]=city",
+                url: "https://secure.geobytes.com/AutoCompleteCity?key=7c756203dbb38590a66e01a5a3e1ad96&callback=?&q=" + city,
                 dataType: "json",
                 data: "",
                 success: function (data) {
                     response($.map(data, function (item) {
                         return {
-                            label: item.name,
-                            value: item.name
+                            label: item,
+                            value: item,
+                            coordinates: item,
+                            country_name: item
                         };
                     }));
                 }
             });
         },
         select: function (event, ui) {
-            $("#" + tag).val(ui.item.value);
+            $("#" + tag).val(ui.item.label);
+            $("#txtLocationLatLong").val(String(ui.item.coordinates));
             return false;
         }
     });
