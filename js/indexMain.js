@@ -170,14 +170,16 @@ function autoAddCities(tag, city) {
                 dataType: "json",
                 data: "",
                 success: function (data) {
-                    response($.map(data, function (item) {
-                        return {
-                            label: item,
-                            value: item,
-                            coordinates: item,
-                            country_name: item
-                        };
-                    }));
+                    if (data)
+                        response($.map(data, function (item) {
+                            if (item != "%s" && item != null && item != undefined)
+                                return {
+                                    label: item,
+                                    value: item,
+                                    coordinates: item,
+                                    country_name: item
+                                };
+                        }));
                 }
             });
         },
