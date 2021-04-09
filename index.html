@@ -53,6 +53,16 @@
             display: none !important;
             visibility: hidden !important;
         }
+
+        .popular_destination_area .single_destination {
+            height: 200px;
+            width: 350px;
+        }
+
+        .popular_places_area .single_place .thumb img {
+            width: 100%;
+            height: 225px;
+        }
     </style>
 </head>
 
@@ -261,29 +271,38 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3">
-                    <div class="form_area">
-                        <h3>Where you want to go?</h3>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form_area">
+                                <h2 style='color:whitesmoke'>Where you want to go?</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="search_wrap">
                         <form class="search_form" action="#">
                             <div class="input_field">
-                                <input type="text" placeholder="Where to go?">
+                                <div class="row">
+                                    <div class="col-lg-10"> <input type="text" placeholder="Where to go?"
+                                            id='searchLocation'> &nbsp;</div>
+                                    <div class="col-lg-2"> <button class="btn btn-primary" type="button">Search</button>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="input_field">
-                                <input id="datepicker" placeholder="Date">
-                            </div>
-                            <div class="input_field">
+
+                            <!-- <div class="input_field">
+
+                            </div> -->
+                            <!-- <div class="input_field">
                                 <select>
                                     <option data-display="Travel type">Travel type</option>
                                     <option value="1">Some option</option>
                                     <option value="2">Another option</option>
                                 </select>
-                            </div>
-                            <div class="search_btn">
-                                <button class="boxed-btn4 " type="submit">Search</button>
-                            </div>
+                            </div> -->
+
                         </form>
                     </div>
                 </div>
@@ -292,7 +311,7 @@
     </div>
 
 
-    <div class="popular_destination_area">
+    <!-- <div class="popular_destination_area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -383,9 +402,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-
+    <!-- 
     <div class="newletter_area overlay">
         <div class="container">
             <div class="row justify-content-center align-items-center">
@@ -418,7 +437,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="popular_places_area">
         <div class="container">
@@ -438,7 +457,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Udaipur">
                                 <h3>Udaipur</h3>
                             </a>
                             <p>India</p>
@@ -467,7 +486,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Delhi">
                                 <h3>Delhi</h3>
                             </a>
                             <p>India</p>
@@ -496,7 +515,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Lonavala">
                                 <h3>Lonavala</h3>
                             </a>
                             <p>India</p>
@@ -525,7 +544,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Pondicherry">
                                 <h3>Pondicherry</h3>
                             </a>
                             <p>India</p>
@@ -554,7 +573,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Rishikesh">
                                 <h3>Rishikesh</h3>
                             </a>
                             <p>UIndia</p>
@@ -583,7 +602,7 @@
                             <a href="#" class="prise"></a>
                         </div>
                         <div class="place_info">
-                            <a href="destination_details.html">
+                            <a href="destination_details.html?loc=Shimla">
                                 <h3>Shimla</h3>
                             </a>
                             <p>India</p>
@@ -605,13 +624,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
                     <div class="more_place_btn text-center">
                         <a class="boxed-btn4" href="#">More Places</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="video_area video_bg overlay">
@@ -907,8 +926,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="serch_form">
-                    <input type="text" placeholder="Search">
-                    <button type="submit">search</button>
+                    <input type="text" id='txtTopSearch' placeholder="Search">
+                    <button type="button">search</button>
                 </div>
             </div>
         </div>
@@ -942,7 +961,12 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet">
+    </link>
+
     <script src="js/indexMain.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
     <script src="js/jquery.instagramFeed.min.js"></script>
     <script id="loadInstagram">
         (function ($) {
@@ -954,13 +978,13 @@
                     'display_biography': false,
                     'display_gallery': true,
                     'display_captions': false,
-                    'max_tries': 8,
+                    'max_tries': 10,
                     'callback': null,
                     'styling': true,
                     'items': 6,
                     'items_per_row': 3,
                     'margin': 1,
-                    'lazy_load': true,
+                    'lazy_load': false,
                     'on_error': console.error
                 });
             });
@@ -968,12 +992,13 @@
     </script>
 
     <script>
-        $('#datepicker').datepicker({
-            iconsLibrary: 'fontawesome',
-            icons: {
-                rightIcon: '<span class="fa fa-caret-down"></span>'
-            }
-        });
+        if ($('#datepicker').length > 0)
+            $('#datepicker').datepicker({
+                iconsLibrary: 'fontawesome',
+                icons: {
+                    rightIcon: '<span class="fa fa-caret-down"></span>'
+                }
+            });
     </script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
@@ -986,6 +1011,7 @@
     </script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
 
 </body>
 

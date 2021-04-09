@@ -136,7 +136,37 @@ $(function () {
         verifyOTPAndSignIn();
     });
     renderCaptcha();
+
+    $("#searchLocation, #txtTopSearch").on("input", function () {
+        var city = $(this).val();
+        var tagID = $(this).attr("id");
+        autoAddCities(tagID, city)
+    });
 });
+
+function autoAddCities(tag, city) {
+    $("#" + tag).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "http://autocomplete.travelpayouts.com/places2?term=" + city + "&locale=en&types[]=city",
+                dataType: "json",
+                data: "",
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.name,
+                            value: item.name
+                        };
+                    }));
+                }
+            });
+        },
+        select: function (event, ui) {
+            $("#" + tag).val(ui.item.value);
+            return false;
+        }
+    });
+}
 
 function renderCaptcha() {
     window.recaptchaVerfier = new firebase.auth.RecaptchaVerifier('captchaContainer');
