@@ -82,6 +82,14 @@
             width: 100%;
             height: 225px;
         }
+
+        .instagram-image img {
+            border-radius: 5px !important;
+        }
+
+        .instagram-image img:hover {
+            box-shadow: 0 1px 5px rgba(245, 242, 242, 0.2);
+        }
     </style>
 </head>
 
@@ -998,26 +1006,24 @@
 
     <script src="js/jquery.instagramFeed.min.js"></script>
     <script id="loadInstagram">
-        (function ($) {
-            $(window).on('load', function () {
-                $.instagramFeed({
-                    'username': 'touristguide2021',
-                    'container': "#instagram_feed2",
-                    'display_profile': false,
-                    'display_biography': false,
-                    'display_gallery': true,
-                    'display_captions': false,
-                    'max_tries': 10,
-                    'callback': null,
-                    'styling': true,
-                    'items': 6,
-                    'items_per_row': 3,
-                    'margin': 1,
-                    'lazy_load': false,
-                    'on_error': console.error
-                });
+        $(() => {
+            $.instagramFeed({
+                'username': 'touristguide2021',
+                'container': "#instagram_feed2",
+                'display_profile': false,
+                'display_biography': false,
+                'display_gallery': true,
+                'display_captions': false,
+                'max_tries': 10,
+                'callback': null,
+                'styling': true,
+                'items': 6,
+                'items_per_row': 3,
+                'margin': 1,
+                'lazy_load': false,
+                'on_error': console.error
             });
-        })(jQuery);
+        });
     </script>
 
     <script>

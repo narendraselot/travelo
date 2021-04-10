@@ -1,0 +1,369 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tourist Guide</title>
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="css/nice-select.css">
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/gijgo.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slicknav.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    <a href>
+                                        <script type="text/javascript" style="display:none">
+                                            //<![CDATA[
+                                            window.__mirage2 = { petok: "d332294f8cd1c8388df4dd39ba1e92cf26b0f1af-1614013487-1800" };
+//]]>
+                                        </script>
+                                        <script type="text/javascript"
+                                            src="https://ajax.cloudflare.com/cdn-cgi/scripts/04b3eb47/cloudflare-static/mirage2.min.js"></script>
+                                        <img data-cfsrc="img/TouristLogo.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/TouristLogo.png" alt></noscript>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="index.html">home</a></li>
+                                            <li><a class="active" href>home</a></li>
+                                            <li><a href="about.html">About</a></li>
+
+                                            <!-- #### LogIn FormatMenu START #### -->
+                                            <li id="login">
+                                                <a style='cursor:pointer' href='index.html'>
+                                                    Login
+                                                </a>
+                                            </li>
+                                            <li id="guidelogin" class='invisible'>
+                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
+                                                    Guide Login
+                                                </a>
+                                            </li>
+
+                                            <input type="hidden" id="hdnUserType">
+                                            <li id="Username" class='invisible'></li>
+                                            <li id="Photo" class='invisible'><img src="" height="35px" width='35px'
+                                                    alt="" id="dpPhoto" draggable="false"></li>
+                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
+                                                <a id="btnLogout">Logout</a>
+                                            </li>
+                                            <!-- #### LogIn FormatMenu STOP #### -->
+
+                                            <li><a class href="travel_destination.html">Destination</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                                <div class="social_wrap d-flex align-items-center justify-content-end">
+
+                                    <div class="social_links d-none d-xl-block">
+                                        <ul>
+                                            <li><a href="#"> <i class="fa fa-instagram"></i> </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seach_icon">
+                                <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="row text-center" id='divMainBookGuide'>
+        <div class='col-lg-2 col-md-2 col-sm-2'>&nbsp;</div>
+        <div class='col-lg-8 col-md-8 col-sm-8'>
+            <input style="font-family: FontAwesome, 'Trebuchet MS';" class='single-input' type='text'
+                onfocus="this.placeholder = ''" onblur="this.placeholder = '&#xf002; &nbsp; Search City'"
+                placeholder="&#xf002; &nbsp; Search City" id='txtSearchTable'>
+        </div>
+        <br><br>
+        <div class='col-lg-2 col-md-2 col-sm-2'>&nbsp;</div>
+        <div class='col-lg-12 col-sm-12 col-md-12'>
+            <div class="table-responsive">
+                <table class="table table-bordered" id='tableListForGuide'></table>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-md-6 col-lg-4 ">
+                        <div class="footer_widget">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img data-cfsrc="img/TouristLogo.png" alt
+                                        style="display:none;visibility:hidden;"><noscript><img src="img/TouristLogo.png"
+                                            alt></noscript>
+                                </a>
+                            </div>
+                            <p>5th flora, 700/D kings road, green <br> lane New York-1782 <br>
+                                <a href="#">+10 367 826 2567</a> <br>
+                                <a href="#"><span class="__cf_email__"
+                                        data-cfemail="53303c3d273230271330322123363d2736217d303c3e">[email&#160;protected]</span></a>
+                            </p>
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-twitter-alt"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-pinterest"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-youtube-play"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Company
+                            </h3>
+                            <ul class="links">
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#"> Gallery</a></li>
+                                <li><a href="#"> Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Popular destination
+                            </h3>
+                            <ul class="links double_links">
+                                <li><a href="#">Himachal</a></li>
+                                <li><a href="#">Manali</a></li>
+                                <li><a href="#">Assam</a></li>
+                                <li><a href="#">Shimla</a></li>
+                                <li><a href="#">Kerala</a></li>
+                                <li><a href="#">Kashmir</a></li>
+                                <li><a href="#">Dehradun</a></li>
+                                <li><a href="#">Goa</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget">
+                            <h3 class="footer_title">
+                                Instagram
+                            </h3>
+                            <div class="instagram_feed">
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/1.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/1.png" alt></noscript>
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/2.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/2.png" alt></noscript>
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/3.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/3.png" alt></noscript>
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/4.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/4.png" alt></noscript>
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/5.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/5.png" alt></noscript>
+                                    </a>
+                                </div>
+                                <div class="single_insta">
+                                    <a href="#">
+                                        <img data-cfsrc="img/instagram/6.png" alt
+                                            style="display:none;visibility:hidden;"><noscript><img
+                                                src="img/instagram/6.png" alt></noscript>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right_text">
+            <div class="container">
+                <div class="footer_border"></div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <p class="copy_right text-center">
+
+                            Copyright &copy;
+                            <script data-cfasync="false"
+                                src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+                                href="touristguide.netlify.com" target="_blank">Tourist Guide</a>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade custom_search_pop" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="serch_form">
+                    <input type="text" placeholder="Search">
+                    <button type="submit">search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/isotope.pkgd.min.js"></script>
+    <script src="js/ajax-form.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/scrollIt.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/nice-select.min.js"></script>
+    <script src="js/jquery.slicknav.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/slick.min.js"></script>
+
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- #### COPY THIS SCRIPTS START #### -->
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic"
+        rel="stylesheet" type="text/css">
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet">
+    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+ https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script defer="" src="https://www.gstatic.com/firebasejs/8.2.1/firebase-storage.js"></script>
+    <!-- SweetAlert 2 Files -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <style>
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .gj-datepicker-md [role=right-icon] {
+            top: 6px;
+        }
+    </style>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src='js/bookGuide.js'></script>
+    <script src="js/indexMain.js"></script>
+
+
+    <!-- #### COPY THIS SCRIPTS END #### -->
+</body>
+
+</html>

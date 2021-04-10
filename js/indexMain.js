@@ -136,6 +136,7 @@ $(function () {
     $("#btnSignUpUsingNumber").on("click", function () {
         verifyOTPAndSignIn();
     });
+    
     renderCaptcha();
 
     $("#searchLocation, #txtTopSearch").on("input", function () {
@@ -143,7 +144,6 @@ $(function () {
         var tagID = $(this).attr("id");
         autoAddCities(tagID, city)
     });
-
 
     $("#btnLocationSearchOnMap").on("click", function () {
         // toast($("#txtLocationLatLong").val(), "info");
@@ -192,10 +192,11 @@ function autoAddCities(tag, city) {
 }
 
 function renderCaptcha() {
-    window.recaptchaVerfier = new firebase.auth.RecaptchaVerifier('captchaContainer');
-
-
-    recaptchaVerfier.render();
+    if ($("#captchaContainer").length)
+        if ($("#captchaContainer").length > 0) {
+            window.recaptchaVerfier = new firebase.auth.RecaptchaVerifier('captchaContainer');
+            recaptchaVerfier.render();
+        }
 }
 
 function logout() {
