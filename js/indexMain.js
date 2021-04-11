@@ -136,7 +136,7 @@ $(function () {
     $("#btnSignUpUsingNumber").on("click", function () {
         verifyOTPAndSignIn();
     });
-    
+
     renderCaptcha();
 
     $("#searchLocation, #txtTopSearch").on("input", function () {
@@ -156,13 +156,145 @@ $(function () {
 
 function searchUsingLatLon() {
     $("#iframeLocation").removeClass("invisible");
-    $("#iframeLocation").html('<iframe src="http://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
+    $("#divWeather").removeClass("invisible");
+
+    $("#iframeLocation").html('<iframe id="iframeWithCityMap" src="http://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
+    getWeatherDetails($("#txtLocationLatLong").val());
+}
+
+function getWeatherDetails(CityWithCountry) {
+    var city = CityWithCountry.split(',')[0];
+    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=f13e12d2bf352be97dfefa35c2e9faeb&units=metric&temp=Celsius";
+    $.ajax({
+        url: weatherURL,
+        dataType: "json",
+        data: "",
+        success: function (data) {
+            if (data) {
+                // alert(JSON.stringify(data))
+                //console.log(data);
+
+                var feels_like = "";
+                var humidity = "";
+                var pressure = "";
+                var temp = "";
+                var temp_max = "";
+                var temp_min = "";
+                var weatherID = "";
+                var main = "";
+                var weatherDesc = "";
+                var weatherIcon = "";
+                var Wind = "";
+                if (data.main) {
+                    feels_like = data.main.feels_like;
+                    humidity = data.main.humidity;
+                    pressure = data.main.pressure;
+                    temp = data.main.temp;
+                    temp_max = data.main.temp_max;
+                    temp_min = data.main.temp_min;
+                }
+
+                var WeatherArray = data.weather;
+                if (data.wind) {
+                    Wind = data.wind.speed;
+                }
+
+                if (WeatherArray)
+                    if (WeatherArray.length > 0) {
+                        weatherID = WeatherArray[0].id;
+                        main = WeatherArray[0].main;
+                        weatherDesc = WeatherArray[0].description;
+                        weatherIcon = WeatherArray[0].icon;
+                    }
+
+                // var weatherHtml = '<div class="Wethcontainer d-flex justify-content-center">' +
+                //     '<div class="Wethweather">' +
+                //     '<div class="row">' +
+                //     '       <div class="col-md-12">' +
+                //     '           <div class="Wethcard">' +
+                //     '               <span class="Wethicon">' +
+                //     '                   <img class="img-fluid" src="http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png" />' +
+                //     '               </span>' +
+                //     '               <div class="Wethtitle">' +
+                //     '                   <p>' + city + '</p>' +
+                //     '               </div>' +
+                //     '               <div class="Wethtemp">' + feels_like + '<sup>&deg;</sup></div>' +
+                //     '               <div class="row">' +
+                //     '                   <div class="col-4">' +
+                //     '                       <div class="Wethheader">Weather</div>' +
+                //     '                       <div class="value">' + main + '</div>' +
+                //     '                   </div>' +
+                //     '                   <div class="col-4">' +
+                //     '                       <div class="Wethheader">Humidity</div>' +
+                //     '                       <div class="value">' + humidity + '</div>' +
+                //     '                   </div>' +
+                //     '                   <div class="col-4">' +
+                //     '                       <div class="Wethheader">Pressure</div>' +
+                //     '                       <div class="value">' + pressure + '</div>' +
+                //     '                   </div>' +
+                //     '               </div>' +
+                //     '           </div>' +
+                //     '       </div>' +
+                //     '   </div>' +
+                //     '</div>' +
+                //     '</div>';
+
+
+                var currentTime = new Date();
+                var currentOffset = currentTime.getTimezoneOffset();
+                var ISTOffset = 330; // IST offset UTC +5:30
+                var ISTTime = new Date(currentTime.getTime() + (ISTOffset + currentOffset) * 60000);
+                // ISTTime now represents the time in IST coordinates
+
+                var hoursIST = ISTTime.getHours()
+                var minutesIST = ISTTime.getMinutes()
+
+                //document.write("<b>" + hoursIST + ":" + minutesIST + " " + "</b>")
+                var weatherHtml = '<div class="container-fluid">' +
+                    '<div class="row justify-content-center">' +
+                    '   <div class="col-12 col-md-12 col-sm-12 col-xs-12">' +
+                    '       <div class="card Wethcard p-4">' +
+                    '           <div class="d-flex" style="font-family:Trebuchet MS !important;">' +
+                    '               <h6 class="flex-grow-1">' + city + ' </h6>&nbsp;&nbsp;' +
+                    '               <h6> ' + hoursIST + ' : ' + minutesIST + '</h6>' +
+                    '           </div>' +
+                    '           <div class="d-flex flex-column Wethtemp mt-5 mb-3">' +
+                    '               <h1 class="mb-0 font-weight-bold" id="heading"> ' + feels_like + '° C </h1> ' +
+                    '               <span class="small Wethgrey">' + main + '</span>' +
+                    '           </div>' +
+                    '           <div class="d-flex">' +
+                    '               <div class="Wethtemp-details flex-grow-1">' +
+                    '                   <p class="my-1"> <img src="https://i.imgur.com/B9kqOzp.png" height="17px"> <span> ' + Wind + ' mp/h' +
+                    '                       </span> </p>' +
+                    '                   <p class="my-1"> <i class="fa fa-tint mr-2" aria-hidden="true"></i> <span> ' + humidity + '% </span> </p>' +
+                    '               </div>' +
+                    '               <div> <img draggable="false" src="http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png" width="100px"> </div>' +
+                    '           </div>' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</div>' +
+                    '</div>';
+
+                //
+                //iframeWithCityMap
+
+                $("#divWeather").html(weatherHtml);
+            }
+        },
+        error: function (error) {
+            alert('error; ' + eval(error));
+        }
+
+    });
 }
 
 function autoAddCities(tag, city) {
     $("#txtLocationLatLong").val("");
     $("#iframeLocation").html(null);
     $("#iframeLocation").addClass("invisible");
+    $("#divWeather").addClass("invisible");
+    $("#divWeather").html(null);
+
     $("#" + tag).autocomplete({
         source: function (request, response) {
             $.ajax({
