@@ -158,13 +158,13 @@ function searchUsingLatLon() {
     $("#iframeLocation").removeClass("invisible");
     $("#divWeather").removeClass("invisible");
 
-    $("#iframeLocation").html('<iframe id="iframeWithCityMap" src="http://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
+    $("#iframeLocation").html('<iframe id="iframeWithCityMap" src="https://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
     getWeatherDetails($("#txtLocationLatLong").val());
 }
 
 function getWeatherDetails(CityWithCountry) {
     var city = CityWithCountry.split(',')[0];
-    var weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=f13e12d2bf352be97dfefa35c2e9faeb&units=metric&temp=Celsius";
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=f13e12d2bf352be97dfefa35c2e9faeb&units=metric&temp=Celsius";
     $.ajax({
         url: weatherURL,
         dataType: "json",
@@ -268,7 +268,7 @@ function getWeatherDetails(CityWithCountry) {
                     '                       </span> </p>' +
                     '                   <p class="my-1"> <i class="fa fa-tint mr-2" aria-hidden="true"></i> <span> ' + humidity + '% </span> </p>' +
                     '               </div>' +
-                    '               <div> <img draggable="false" src="http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png" width="100px"> </div>' +
+                    '               <div> <img draggable="false" src="https://openweathermap.org/img/wn/' + weatherIcon + '@2x.png" width="100px"> </div>' +
                     '           </div>' +
                     '       </div>' +
                     '   </div>' +
