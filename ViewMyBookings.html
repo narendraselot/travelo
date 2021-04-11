@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Emergency</title>
+    <title>View Bookings</title>
     <meta name="description" content>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,26 +25,7 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        .iFramecontainer {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 80%;
-            /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
-        }
 
-        /* Then style the iframe to fit in the container div with full height and width */
-        .responsive-iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
 </head>
 
 <body>
@@ -142,12 +123,12 @@
     </header>
 
 
-    <div class="bradcam_area bradcam_bg_2">
+    <div class="bradcam_area bradcam_bg_2" style='height: 80px !important;'>
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="bradcam_text text-center">
-                        <h3>Payment</h3>
+                        <h3>Guide Booking</h3>
                     </div>
                 </div>
             </div>
@@ -166,7 +147,21 @@
         <div class="col-sm-12 col-md-12 col-lg-12" id='divViewBookings'>
 
         </div>
-        <div class="col-sm-12 col-md-12 col-lg-12" style='margin:15px !important; padding:15px !important;'>&nbsp;</div>
+    </div>
+
+    <div class="limiter invisible">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head" id='tblBookedGuideHead'>
+
+                    </div>
+                    <div class="table100-body js-pscroll ps ps--active-y" id='tblBookedGuideBody'>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -422,9 +417,67 @@
             margin: 10px;
             font-weight: bolder;
         }
+
+        .limiter,
+        table,
+        .cell100,
+        .row100,
+        .head,
+        .column1,
+        .column2,
+        .column3,
+        .column4 {
+            font-family: Calibri, 'Trebuchet MS' !important;
+        }
     </style>
     <script src="js/indexMain.js"></script>
     <script src='js/viewBooking.js'></script>
+    <link href="css/tableView.css" rel="stylesheet" />
+    <style>
+        .iFramecontainer {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 80%;
+            /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+
+        /* Then style the iframe to fit in the container div with full height and width */
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container-table100 {
+            min-height: 10vh;
+            padding: 10px !important;
+        }
+
+        .column1 {
+            width: 16%;
+        }
+
+        .column2 {
+            width: 9%;
+        }
+
+        .column3 {
+            width: 12%;
+        }
+
+        .column4 {
+            width: 8%;
+        }
+
+        .column5 {
+            width: 13%;
+        }
+    </style>
 </body>
 
 </html>
