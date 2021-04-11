@@ -165,16 +165,7 @@
                             <div class="story_info">
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <p>Consulting represents success at realizing the company is going in the wrong
-                                            direction. The only time the company fails is when it is not possible to do
-                                            a turnaround anymore. We help companies pivot into more profitable
-                                            directions where they can expand and grow. It is inevitable that companies
-                                            will end up making a few mistakes; we help them correct these mistakes.</p>
-                                        <p>Consulting represents success at realizing the company is going in the wrong
-                                            direction. The only time the company fails is when it is not possible to do
-                                            a turnaround anymore. We help companies pivot into more profitable
-                                            directions where they can expand and grow. It is inevitable that companies
-                                            will end up making a few mistakes; we help them correct these mistakes.</p>
+                                        <p>The Tourist Guide is an advance system for improving performance of tourism in India by attracting more tourists with the help of easy and convenient facilities provided in our application. And helping local people to expand their businesses in their area with the help of our application</p>. <p>As we all know that India is a diverse country full of historical places and monuments which attract lot of tourists towards it. But most of the time the tourists are not happy with their tourism experience in India as they don’t have proper information regarding the places and about other information which are necessary.</p>
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +187,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="counter_wrap">
+                            <!-- <div class="counter_wrap">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-4">
                                         <div class="single_counter text-center">
@@ -217,7 +208,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -231,7 +222,8 @@
                     <div class="video_wrap text-center">
                         <h3>Enjoy Video</h3>
                         <div class="video_icon">
-                            <a class="popup-video video_play_button" href="https://www.youtube.com/watch?v=f59dDEk57i0">
+                            <a class="popup-video video_play_button" 
+                              href=<iframe width="956" height="538" src="https://www.youtube.com/embed/35npVaFGHMY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"allowfullscreen></iframe>
                                 <i class="fa fa-play"></i>
                             </a>
                         </div>
@@ -274,7 +266,7 @@
         </div>
     </div>
 
-    <div class="testimonial_area">
+    <!-- <div class="testimonial_area">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -337,9 +329,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="recent_trip_area">
+    <!-- <div class="recent_trip_area">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6">
@@ -402,7 +394,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <footer class="footer">
         <div class="footer_top">
             <div class="container">
@@ -458,7 +450,7 @@
                                 Company
                             </h3>
                             <ul class="links">                                
-                                <li><a href="#">About</a></li>                                                                
+                                <li><a href="about.html">About</a></li>                                                                
                             </ul>
                         </div>
                     </div>
@@ -484,50 +476,8 @@
                             <h3 class="footer_title">
                                 Instagram
                             </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/1.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/1.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/2.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/2.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/3.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/3.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/4.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/4.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/5.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/5.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/6.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/6.png" alt></noscript>
-                                    </a>
-                                </div>
-                            </div>
+                            <div class="instagram_feed" id='instagram_feed2'>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -595,6 +545,8 @@
     <script src="js/mail-script.js"></script>
     <script src="js/main.js"></script>
     <script>
+
+   
         $('#datepicker').datepicker({
             iconsLibrary: 'fontawesome',
             icons: {
