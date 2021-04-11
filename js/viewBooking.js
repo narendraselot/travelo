@@ -68,7 +68,6 @@ function getLatestBookingData(user) {
                                 '<td class="cell100 column3">' + item.ServiceLocation + '</td>' +
                                 '<td class="cell100 column4">' + item.BookedDate + '</td>' +
                                 '<td class="cell100 column5">' + item.guideEmail + '</td>' +
-
                                 '</tr>';
                         } else {
                             $(".limiter").addClass("invisible");

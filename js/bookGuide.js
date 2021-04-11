@@ -100,7 +100,11 @@ function showGuideDetils(obj) {
             $('<div class="row text-center">' +
                 '<div class="col-sm-12 col-lg-12 col-md-12 text-center" style="margin:3px;">' +
                 '<input type="text" placeholder="Select Date" class="form-input datepicker" style="width:100% !important;overflow:visible;"/>' +
-                '</div></div>').insertAfter("#rowForDetails");
+                '</div>' +
+                '<div class="col-sm-12 col-lg-12 col-md-12 text-center" style="margin:3px;">' +
+                '<input type="text" id="txtCustomerName" placeholder="Full Name" class="swal2-input" style="width:100% !important;overflow:visible;"/>' +
+                '</div>' +
+                '</div>').insertAfter("#rowForDetails");
 
             $('.datepicker').datepicker({
                 format: 'mm/dd/yyyy',
@@ -110,10 +114,15 @@ function showGuideDetils(obj) {
         confirmButtonText: '<i class="fa fa-thumbs-up"></i> Book Guide!',
         cancelButtonText: '<i class="fa fa-thumbs-down"></i> Cancel',
         preConfirm: () => {
-            Swal.showLoading();
-        },
-        willClose: () => {
-            bookGuideSendToFirebase();
+            if (($('.datepicker').val() == null || $('.datepicker').val() == "" || $('.datepicker').val() == undefined) ||
+                ($('#txtCustomerName').val() == null || $('#txtCustomerName').val() == "" || $('#txtCustomerName').val() == undefined)
+            ) {
+                Swal.hideLoading();
+                Swal.showValidationMessage(`Please select a valid date & Name`);
+            } else {
+                Swal.showLoading();
+                bookGuideSendToFirebase($('#txtCustomerName').val());
+            }
         }
     });
     // guideDetails.GuideName
@@ -123,10 +132,12 @@ function showGuideDetils(obj) {
     // guideDetails.guideEmail
 }
 
-function bookGuideSendToFirebase() {
-    if ($('.datepicker').val() == null || $('.datepicker').val() == "" || $('.datepicker').val() == undefined) {
+function bookGuideSendToFirebase(CustomerName1) {
+    if (($('.datepicker').val() == null || $('.datepicker').val() == "" || $('.datepicker').val() == undefined) &&
+        (CustomerName1 == null || CustomerName1 == "" || CustomerName1 == undefined)
+    ) {
         Swal.hideLoading();
-        Swal.showValidationMessage(`Please select a valid date`);
+        Swal.showValidationMessage(`Please select a valid date & Name`);
     } else {
         var setValue = JSON.parse($("#hdnAllDetails").val());
         var date = $('.datepicker').val()
@@ -136,13 +147,65 @@ function bookGuideSendToFirebase() {
             if (user) {
                 var userUID = user.uid;
                 db.collection("Booking").doc(userUID).get().then((querySnapshot) => {
-                    if (querySnapshot.exists) {
-                        var BookingData = querySnapshot.data();
-                        var settingArray = BookingData.BookingDetails;
+                    if (querySnapshot.size > 0) {
+                        if (querySnapshot.exists) {
+                            var BookingData = querySnapshot.data();
+                            var settingArray = BookingData.BookingDetails;
+                            setValue.UserId = userUID;
+                            setValue.CustomerName = CustomerName1;
+                            settingArray.push(setValue);
+                            BookingData.BookingDetails = settingArray;
+                            db.collection("Booking").doc(userUID).set(BookingData).then(() => {
+                                Email.send({
+                                    SecureToken: "8d4f68cb-5259-4e47-a3a2-dd219901e043",
+                                    To: setValue.guideEmail,
+                                    From: "tooristguide@gmail.com",
+                                    Subject: "Hey a new User just booked you as a guide!",
+                                    Body: "Hola Guide,<br> \n New Booking has arrived, please login to your Tourist Guide Account or refer this link : https://touristguide.netlify.com",
+                                }).then(function (message) {
+                                    console.log(message);
+                                    Swal.hideLoading();
+                                    Swal.fire('Guide Booked!', '', 'success');
+                                });
+                            }).catch((error) => {
+                                Swal.hideLoading();
+                                Swal.fire('Oops! Something Went Wrong ' + error, '', 'error');
+                            });
+                        } else {
+                            debugger;
+                            var newArray = [];
+                            setValue.UserId = userUID;
+                            setValue.CustomerName = CustomerName1;
+                            newArray.push(setValue)
+                            var valueToUpload = {};
+                            valueToUpload.BookingDetails = newArray;
+
+                            db.collection("Booking").doc(userUID).set(valueToUpload).then(() => {
+                                Email.send({
+                                    SecureToken: "8d4f68cb-5259-4e47-a3a2-dd219901e043",
+                                    To: setValue.guideEmail,
+                                    From: "tooristguide@gmail.com",
+                                    Subject: "Hey a new User just booked you as a guide!",
+                                    Body: "Hola Guide,<br> \n New Booking has arrived, please login to your Tourist Guide Account or refer this link : https://touristguide.netlify.com",
+                                }).then(function (message) {
+                                    console.log(message);
+                                    Swal.hideLoading();
+                                    Swal.fire('Guide Booked!', '', 'success');
+                                });
+                            }).catch((error) => {
+                                Swal.hideLoading();
+                                Swal.fire('Oops! Something Went Wrong ' + error, '', 'error')
+                            });
+                        }
+                    } else {
+                        debugger;
+                        var newArray = [];
                         setValue.UserId = userUID;
-                        settingArray.push(setValue);
-                        BookingData.BookingDetails = settingArray;
-                        db.collection("Booking").doc(userUID).set(BookingData).then(() => {
+                        setValue.CustomerName = CustomerName1;
+                        newArray.push(setValue)
+                        var valueToUpload = {};
+                        valueToUpload.BookingDetails = newArray;
+                        db.collection("Booking").doc(userUID).set(valueToUpload).then(() => {
                             Email.send({
                                 SecureToken: "8d4f68cb-5259-4e47-a3a2-dd219901e043",
                                 To: setValue.guideEmail,
@@ -154,20 +217,6 @@ function bookGuideSendToFirebase() {
                                 Swal.hideLoading();
                                 Swal.fire('Guide Booked!', '', 'success');
                             });
-                        }).catch((error) => {
-                            Swal.hideLoading();
-                            Swal.fire('Oops! Something Went Wrong ' + error, '', 'error');
-                        });
-                    } else {
-                        var newArray = [];
-                        setValue.UserId = userUID;
-                        newArray.push(setValue)
-                        var valueToUpload = {};
-                        valueToUpload.BookingDetails = newArray;
-
-                        db.collection("Booking").doc(userUID).set(valueToUpload).then(() => {
-                            Swal.hideLoading();
-                            Swal.fire('Guide Booked!', '', 'success')
                         }).catch((error) => {
                             Swal.hideLoading();
                             Swal.fire('Oops! Something Went Wrong ' + error, '', 'error')
