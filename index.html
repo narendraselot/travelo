@@ -166,28 +166,33 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href>home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li>
-                                                <a class href="travel_destination.html">Destination</a>
+                                            <li class="nav-item"><a class="active nav-link" href>home</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="travel_destination.html">Destination</a>
                                             </li>
-                                            <li><a href="Emergency.html">EmergencyService</a></li>
+                                            <li class="nav-item"><a class="nav-link"
+                                                    href="Emergency.html">EmergencyService</a></li>
                                             <!-- #### LogIn FormatMenu START #### -->
-                                            <li id="Username" class='invisible'></li>
-                                            <li id="Photo" class='invisible'>
+                                            <li id="nav-item Username" class='invisible'></li>
+                                            <li id="Photo" class='nav-item invisible'>
                                                 <img alt="Profile" height="35px" width='35px' id="dpPhoto">
                                             </li>
-                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
+                                            <li class="nav-item" id="login">
+                                                <a class="nav-link" style='cursor:pointer' id="btnLogin"
                                                     onclick="login()">Login
-                                                    &nbsp;&nbsp;</a>
+                                                    &nbsp;&nbsp;
+                                                </a>
                                             </li>
-                                            <li id="guidelogin" class='invisible'>
-                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
+                                            <li id="guidelogin" class='nav-item invisible'>
+                                                <a class="nav-link" style='cursor:pointer' id="btnGuideLogin"
+                                                    onclick="guideSignIn()">
                                                     Guide&nbsp;Login &nbsp;
                                                 </a>
                                             </li>
-                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                                <a id="btnLogout">Logout</a>
+                                            <li id="liLogout" class='nav-item invisible' style='cursor:pointer'>
+                                                <a class="nav-link" id="btnLogout"
+                                                    onclick="javascript:logout();">Logout</a>
                                             </li>
                                             <input type="hidden" id="hdnUserType">
                                             <!-- #### LogIn FormatMenu STOP #### -->
@@ -200,6 +205,9 @@
                                             </li> -->
                                         </ul>
                                     </nav>
+
+
+
                                 </div>
                             </div>
                             <div class="col-xl-4 col-lg-4 d-none d-lg-block">
@@ -212,38 +220,38 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="seach_icon">
+                            <!-- <div class="seach_icon">
                                 <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none">
-                                    <li><a class="active" href>home</a></li>
-                                    <li><a href="about.html">About</a></li>
-                                    <li>
-                                        <a class href="travel_destination.html">Destination</a>
-                                    </li>
-                                    <li><a href="Emergency.html">EmergencyService</a></li>
-                                    <!-- #### LogIn FormatMenu START #### -->
-                                    <li id="MobUsername" class='invisible'></li>
-                                    <li id="MobPhoto" class='invisible'>
-                                        <img alt="Profile" height="35px" width='35px' id="MobdpPhoto">
-                                    </li>
-                                    <li id="login"><a style='cursor:pointer' id="MobbtnLogin" onclick="login()">Login
-                                            &nbsp;&nbsp;</a>
-                                    </li>
-                                    <li id="Mobguidelogin" class='invisible'>
-                                        <a style='cursor:pointer' id="MobbtnGuideLogin" onclick="guideSignIn()">
-                                            Guide&nbsp;Login &nbsp;
-                                        </a>
-                                    </li>
-                                    <li id="MobliLogout" class='invisible' style='cursor:pointer'>
-                                        <a id="MobbtnLogout">Logout</a>
-                                    </li>
-                                    <input type="hidden" id="MobhdnUserType">
-                                </div>
+                                <nav class="navbar navbar-expand-md bg-dark navbar-dark invisible" id='navMobileNav'>
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <a class="navbar-brand" href="#">
+                                                <img data-cfsrc="img/TouristLogo.png" alt=""
+                                                    src="http://localhost/travelo/img/TouristLogo.png">
+                                            </a>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                                data-target="#collapsibleNavbar">
+                                                <span class="navbar-toggler-icon"></span>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                                                <ul class="navbar-nav" id='ulMobileNav'>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -400,7 +408,7 @@
         </div>
     </div>
 
-    
+
     </div>
 
     <!-- <div class="popular_destination_area">
@@ -912,9 +920,11 @@
                         <div class="footer_widget">
                             <div class="footer_logo">
                                 <a href="#">
-                                    <img data-cfsrc="img/TouristLogo.png" alt
-                                        style="display:none;visibility:hidden;"><noscript><img src="img/TouristLogo.png"
-                                            alt></noscript>
+                                    <img class='imgHeaderLogo' data-cfsrc="img/TouristLogo.png" alt
+                                        style="display:none;visibility:hidden;">
+                                    <noscript>
+                                        <img class='imgHeaderLogo' src="img/TouristLogo.png" alt>
+                                    </noscript>
                                 </a>
                             </div>
                             <p>2,Sai Charan, Gujarat <br> lane India -91 <br>

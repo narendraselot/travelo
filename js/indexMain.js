@@ -12,10 +12,16 @@ firebase.analytics();
 var db = firebase.firestore();
 firebaseNumberResult = "";
 
+
 $(function () {
+    setMobileMenu();
+    $(window).resize(function () {
+        setMobileMenu();
+    });
     $("#txtLocationLatLong").val("");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
@@ -92,6 +98,8 @@ $(function () {
             if (userType == "guide") {
                 document.location.href = "GuideDetails.html";
             }
+            setMobileMenu();
+
         } else {
             $("#login").removeClass("invisible");
             $("#Moblogin").removeClass("invisible");
@@ -107,6 +115,7 @@ $(function () {
             $("#MobdpPhoto").attr("src", "");
             $("#liLogout").addClass("invisible");
             $("#MobliLogout").addClass("invisible");
+            setMobileMenu();
         }
     });
     $("#btnLogout").on("click", function () {
@@ -136,15 +145,12 @@ $(function () {
     $("#btnSignUpUsingNumber").on("click", function () {
         verifyOTPAndSignIn();
     });
-
     renderCaptcha();
-
     $("#searchLocation, #txtTopSearch").on("input", function () {
         var city = $(this).val();
         var tagID = $(this).attr("id");
         autoAddCities(tagID, city)
     });
-
     $("#btnLocationSearchOnMap").on("click", function () {
         // toast($("#txtLocationLatLong").val(), "info");
         if ($("#txtLocationLatLong").val())
@@ -154,10 +160,24 @@ $(function () {
     });
 });
 
+function setMobileMenu() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        $("#navigation").addClass("invisible");
+        $("#navMobileNav").removeClass("invisible");
+        $("#ulMobileNav").removeClass("invisible");
+        $("#ulMobileNav").html($("#navigation").html());
+        $(".logo").addClass("invisible");
+    } else {
+        $("#navigation").removeClass("invisible");
+        $("#navMobileNav").addClass("invisible");
+        $("#ulMobileNav").addClass("invisible");
+        $(".logo").removeClass("invisible");
+    }
+}
+
 function searchUsingLatLon() {
     $("#iframeLocation").removeClass("invisible");
     $("#divWeather").removeClass("invisible");
-
     $("#iframeLocation").html('<iframe id="iframeWithCityMap" src="https://maps.google.com/maps?q=' + $("#txtLocationLatLong").val() + "+Hotels" + '&output=embed&query=Hotel+Tour&map_action=pano" class="responsive-iframe" style="border:0;" allowfullscreen="true" loading="lazy"></iframe>');
     getWeatherDetails($("#txtLocationLatLong").val());
 }
@@ -392,6 +412,7 @@ function signInGoogle() {
             var credential = result.credential;
             var token = credential.accessToken;
             var user = result.user;
+            window.location.href = window.location.href;
         }).catch((error) => {
             Swal.close();
             var errorCode = error.code;
