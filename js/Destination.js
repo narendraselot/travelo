@@ -42,7 +42,6 @@ var CurrentLocationURLs_IMG = {
     Shimla: "img/place/6.png"
 };
 
-
 var CurrentLocationURLs_Name = {
     Udaipur: "Udaipur",
     Delhi: "Delhi",
