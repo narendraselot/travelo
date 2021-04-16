@@ -62,12 +62,12 @@
                                             <li><a href="index.html">home</a></li>
                                             <li><a href="about.html">About</a></li>
                                             <li><a class href="travel_destination.html">Destination</a> </li>
-                                            <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
                                                     <li><a href="elements.html">elements</a></li>
                                                 </ul>
-                                            </li>
+                                            </li> -->
                                             <!-- #### LogIn FormatMenu START #### -->
                                             <li id="Username" class='invisible'></li>
                                             <li id="Photo" class='invisible'>
@@ -107,11 +107,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="seach_icon">
+                            <!-- <div class="seach_icon">
                                 <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
@@ -230,14 +230,12 @@
                                 Popular destination
                             </h3>
                             <ul class="links double_links">
-                                <li><a href="#">Himachal</a></li>
-                                <li><a href="#">Manali</a></li>
-                                <li><a href="#">Assam</a></li>
-                                <li><a href="#">Shimla</a></li>
-                                <li><a href="#">Kerala</a></li>
-                                <li><a href="#">Kashmir</a></li>
-                                <li><a href="#">Dehradun</a></li>
-                                <li><a href="#">Goa</a></li>
+                                <li><a href="./destination_details.html?loc=Udaipur">Udaipur</a></li>
+                                <li><a href="./destination_details.html?loc=Delhi">Delhi</a></li>
+                                <li><a href="./destination_details.html?loc=Lonavala">Lonavala</a></li>
+                                <li><a href="./destination_details.html?loc=Pondichery">Pondicherry</a></li>
+                                <li><a href="./destination_details.html?loc=Rishikesh">Rishikesh</a></li>
+                                <li><a href="./destination_details.html?loc=Shimla">Shimla</a></li>
                             </ul>
                         </div>
                     </div>
@@ -246,49 +244,7 @@
                             <h3 class="footer_title">
                                 Instagram
                             </h3>
-                            <div class="instagram_feed">
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/1.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/1.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/2.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/2.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/3.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/3.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/4.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/4.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/5.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/5.png" alt></noscript>
-                                    </a>
-                                </div>
-                                <div class="single_insta">
-                                    <a href="#">
-                                        <img data-cfsrc="img/instagram/6.png" alt
-                                            style="display:none;visibility:hidden;"><noscript><img
-                                                src="img/instagram/6.png" alt></noscript>
-                                    </a>
-                                </div>
+                            <div class="instagram_feed" id='instagram_feed2'>                               
                             </div>
                         </div>
                     </div>
@@ -478,6 +434,27 @@
             width: 13%;
         }
     </style>
+     <script src="js/jquery.instagramFeed.min.js"></script>
+     <script id="loadInstagram">
+         $(() => {
+             $.instagramFeed({
+                 'username': 'touristguide2021',
+                 'container': "#instagram_feed2",
+                 'display_profile': false,
+                 'display_biography': false,
+                 'display_gallery': true,
+                 'display_captions': false,
+                 'max_tries': 10,
+                 'callback': null,
+                 'styling': true,
+                 'items': 6,
+                 'items_per_row': 3,
+                 'margin': 1,
+                 'lazy_load': false,
+                 'on_error': console.error
+             });
+         });
+     </script>
 </body>
 
 </html>

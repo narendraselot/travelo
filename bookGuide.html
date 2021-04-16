@@ -97,11 +97,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="seach_icon">
+                            <!-- <div class="seach_icon">
                                 <a data-toggle="modal" data-target="#exampleModalCenter" href="#">
                                     <i class="fa fa-search"></i>
                                 </a>
-                            </div>
+                            </div> -->
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>
@@ -196,14 +196,12 @@
                                 Popular destination
                             </h3>
                             <ul class="links double_links">
-                                <li><a href="#">Himachal</a></li>
-                                <li><a href="#">Manali</a></li>
-                                <li><a href="#">Assam</a></li>
-                                <li><a href="#">Shimla</a></li>
-                                <li><a href="#">Kerala</a></li>
-                                <li><a href="#">Kashmir</a></li>
-                                <li><a href="#">Dehradun</a></li>
-                                <li><a href="#">Goa</a></li>
+                                <li><a href="./destination_details.html?loc=Udaipur">Udaipur</a></li>
+                                <li><a href="./destination_details.html?loc=Delhi">Delhi</a></li>
+                                <li><a href="./destination_details.html?loc=Lonavala">Lonavala</a></li>
+                                <li><a href="./destination_details.html?loc=Pondichery">Pondicherry</a></li>
+                                <li><a href="./destination_details.html?loc=Rishikesh">Rishikesh</a></li>
+                                <li><a href="./destination_details.html?loc=Shimla">Shimla</a></li>
                             </ul>
                         </div>
                     </div>
@@ -320,6 +318,27 @@
 
 
     <!-- #### COPY THIS SCRIPTS END #### -->
+    <script src="js/jquery.instagramFeed.min.js"></script>
+    <script id="loadInstagram">
+        $(() => {
+            $.instagramFeed({
+                'username': 'touristguide2021',
+                'container': "#instagram_feed2",
+                'display_profile': false,
+                'display_biography': false,
+                'display_gallery': true,
+                'display_captions': false,
+                'max_tries': 10,
+                'callback': null,
+                'styling': true,
+                'items': 6,
+                'items_per_row': 3,
+                'margin': 1,
+                'lazy_load': false,
+                'on_error': console.error
+            });
+        });
+    </script>
 </body>
 
 </html>
