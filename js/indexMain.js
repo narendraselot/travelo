@@ -79,6 +79,7 @@ $(function () {
             if (userPhoto == null) {
                 userPhoto = "./img/defuser.webp";
             }
+
             var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
             $("#Moblogin").addClass("invisible");
@@ -96,7 +97,7 @@ $(function () {
             $("#MobdpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();
             if (userType == "guide") {
-               $("#aTagRedirect")[0].click();
+                $("#aTagRedirect")[0].click();
             }
             setMobileMenu();
 
@@ -589,9 +590,11 @@ function verifyOTPAndSignIn() {
             toast("Sign In Success", "success");
 
             var user = result.user;
-            setInterval(() => {
-                window.location.href = window.location.href;
-            }, 500);
+            var userType = $("#hdnUserType").val();
+            if (userType != 'guide')
+                setInterval(() => {
+                    window.location.href = window.location.href;
+                }, 500);
         }).catch(function (error) {
             toast(error, "error");
         })
