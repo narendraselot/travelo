@@ -96,7 +96,7 @@ $(function () {
             $("#MobdpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();
             if (userType == "guide") {
-                document.location.href = "GuideDetails.html";
+               $("#aTagRedirect")[0].click();
             }
             setMobileMenu();
 
