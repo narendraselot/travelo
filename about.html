@@ -25,6 +25,91 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <style>
+        .iFramecontainer {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+
+        /* Then style the iframe to fit in the container div with full height and width */
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .popular_destination_area .single_destination {
+            height: 200px;
+            width: 350px;
+        }
+
+        .popular_places_area .single_place .thumb img {
+            width: 100%;
+            height: 225px;
+        }
+
+        .instagram-image img {
+            border-radius: 5px !important;
+        }
+
+        .instagram-image img:hover {
+            box-shadow: 0 1px 5px rgba(245, 242, 242, 0.2);
+        }
+
+
+        .small {
+            font-size: 80%;
+            font-weight: 400;
+        }
+
+        .Wethcard {
+            background-color: #ffffff;
+            border-radius: 50px;
+            color: #6f707d;
+            font-family: 'Marcellus', serif
+        }
+
+        #heading {
+            font-size: 55px;
+            color: #2b304d
+        }
+
+        .Wethtemp {
+            place-items: center
+        }
+
+        .Wethtemp-details>p>span,
+        .Wethgrey {
+            color: #a3acc1;
+            font-size: 12px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .Wethfa {
+            color: #a5a5b1
+        }
+
+        *:focus {
+            outline: none
+        }
+
+        .flex-grow-1 {
+            -ms-flex-positive: 1 !important;
+            flex-grow: 1 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -58,38 +143,41 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a class href="travel_destination.html">Destination</a></li>
-                                            <li><a href="ViewMyBookings.html">MyBookings</a></li>
-                                            <li><a href="Emergency.html">EmergencyService</a></li>
-                                            <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li><a href="destination_details.html">Destinations details</a></li>
-                                                    <li><a href="elements.html">elements</a></li>
-                                                </ul>
-                                            </li> -->
+                                            <li class="nav-item"><a class="active nav-link" href>Home</a></li>
+                                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="travel_destination.html">Destination</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ViewMyBookings.html">MyBookings</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="Emergency.html">EmergencyService</a>
+                                            </li>
                                             <!-- #### LogIn FormatMenu START #### -->
-                                            <li id="Username" class='invisible'></li>
-                                            <li id="Photo" class='invisible'>
+                                            <li id="nav-item Username" class='invisible'></li>
+                                            <li id="Photo" class='nav-item invisible'>
                                                 <img alt="Profile" height="35px" width='35px' id="dpPhoto">
                                             </li>
-                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
-                                                    onclick="login()">Login</a></li>
-                                            <li id="guidelogin" class='invisible'>
-                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
-                                                    GuideLogin
+                                            <li class="nav-item" id="login">
+                                                <a class="nav-link" style='cursor:pointer' id="btnLogin"
+                                                    onclick="login()">Login
+                                                    &nbsp;&nbsp;
                                                 </a>
                                             </li>
-                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                                <a id="btnLogout">Logout</a>
+                                            <li id="guidelogin" class='nav-item invisible'>
+                                                <a class="nav-link" style='cursor:pointer' id="btnGuideLogin"
+                                                    onclick="guideSignIn()">
+                                                    Guide&nbsp;Login &nbsp;
+                                                </a>
                                             </li>
+                                            <li id="liLogout" class='nav-item invisible' style='cursor:pointer'>
+                                                <a class="nav-link" id="btnLogout"
+                                                    onclick="javascript:logout();">Logout</a>
+                                            </li>
+                                            <input type="hidden" id="hdnUserType">
                                             <!-- #### LogIn FormatMenu STOP #### -->
-                                            <!-- <input type="hidden" id="hdnUserType">
-                                            <li id="Username" class='invisible'></li>
-                                            <li id="Photo" class='invisible'><img src="" height="35px" width='35px'
-                                                    alt="" id="dpPhoto" draggable="false"></li>
-                                             -->
+
                                             <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="destination_details.html">Destinations details</a></li>
@@ -137,7 +225,7 @@
                                         <div class="col-8">
                                             <a class="navbar-brand" href="#">
                                                 <img data-cfsrc="img/TouristLogo.png" alt=""
-                                                    src="http://localhost/travelo/img/TouristLogo.png">
+                                                    src="img/TouristLogo.png">
                                             </a>
                                         </div>
                                         <div class="col-4">
