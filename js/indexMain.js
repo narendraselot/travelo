@@ -25,6 +25,7 @@ $(function () {
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
+
             var userUID = user.uid;
             if ($("#txtGuideEmail").length > 0 && $("#txtGuideName").length > 0) {
                 startLoading();
@@ -73,7 +74,11 @@ $(function () {
             }
 
             if (userNameOfUser == null) {
-                userNameOfUser = "New User";
+                var txtNames = localStorage.getItem("Name");
+                if (txtNames == null || txtNames == "" || txtNames == undefined) {
+                    userNameOfUser = "New User";
+                } else
+                    userNameOfUser = txtNames;
             }
 
             if (userPhoto == null) {
@@ -91,8 +96,8 @@ $(function () {
             $("#MobliLogout").removeClass("invisible");
             $("#guidelogin").addClass("invisible");
             $("#Mobguidelogin").addClass("invisible");
-            $("#Username").html("<a>" + userNameOfUser + "&nbsp;&nbsp;</a>");
-            $("#MobUsername").html("<a>" + userNameOfUser + "&nbsp;&nbsp;</a>");
+            $("#Username").html("<a>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
+            $("#MobUsername").html("<a>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
             $("#dpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             $("#MobdpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();
@@ -353,6 +358,8 @@ function renderCaptcha() {
 }
 
 function logout() {
+    localStorage.removeItem("Name");
+
     firebase.auth().signOut();
     setInterval(() => {
         window.location.href = "index.html";
@@ -569,7 +576,10 @@ function signInUsingPhoneNumber() {
 
 function sendOTP() {
     const number = getPhoneNumberFromUserInput();
-    if (number) {
+    var nameTxt = $("#txtName").val();
+    localStorage.setItem("Name", nameTxt);
+    const Name = localStorage.getItem("Name");
+    if (number && Name) {
         firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerfier).then(function (confirmationResult) {
             window.confirmationResult = confirmationResult;
             firebaseNumberResult = confirmationResult;
@@ -579,7 +589,7 @@ function sendOTP() {
             toast(error, "error");
         });
     } else {
-        toast("Number cannot be empty", "error");
+        toast("Number and Name cannot be empty", "error");
     }
 }
 
