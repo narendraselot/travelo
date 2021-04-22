@@ -15,17 +15,16 @@ firebaseNumberResult = "";
 
 $(function () {
     setMobileMenu();
+    $('.thumb img[data-cfsrc]').attr("style", "height:200px !important;");
     $(window).resize(function () {
         setMobileMenu();
     });
     $("#txtLocationLatLong").val("");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-
             var userEmail = user.email;
             var userPhoto = user.photoURL;
             var userNameOfUser = user.displayName;
-
             var userUID = user.uid;
             if ($("#txtGuideEmail").length > 0 && $("#txtGuideName").length > 0) {
                 startLoading();
@@ -72,7 +71,6 @@ $(function () {
                     stopLoading();
                 });
             }
-
             if (userNameOfUser == null) {
                 var txtNames = localStorage.getItem("Name");
                 if (txtNames == null || txtNames == "" || txtNames == undefined) {
@@ -80,11 +78,9 @@ $(function () {
                 } else
                     userNameOfUser = txtNames;
             }
-
             if (userPhoto == null) {
                 userPhoto = "./img/defuser.webp";
             }
-
             var userUIDOfUser = user.uid;
             $("#login").addClass("invisible");
             $("#Moblogin").addClass("invisible");
@@ -168,6 +164,7 @@ $(function () {
         searchTableEmergency();
     });
 });
+
 function searchTableEmergency() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("txtSearchTableEmergencyNumbers");
