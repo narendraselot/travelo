@@ -35,59 +35,109 @@ function alertAndRedirect(msg, redirectURL) {
 
 function getLatestBookingData(user) {
     var userID = user.uid;
-    debugger;
+    var isMobileView = false;
     db.collection("Booking").get().then((querySnapshot) => {
         if (querySnapshot.size > 0) {
-            var tblHead = '<table>' +
-                '<thead>' +
-                '   <tr class="row100 head">' +
-                '       <th class="cell100 column1">Customer Name</th>' +
-                '       <th class="cell100 column2">Service Location</th>' +
-                '       <th class="cell100 column3">Booked Date</th>' +
-                '   </tr>' +
-                '</thead>' +
-                '</table>';
-            var tblBody = " <table><tbody>";
-            var EntriesFound = false;
-            querySnapshot.forEach((doc) => {
-                $("#tblBookedGuideHead").html("");
-                $("#tblBookedGuideBody").html("");
-                var AllBookings = doc.data();
-                AllBookings = AllBookings.BookingDetails;
-                if (AllBookings)
-                    if (AllBookings.length > 0) {
-                        $(".limiter").removeClass("invisible");
-
-                        AllBookings.forEach((item) => {
-                            if (item) {
-                                if (item.UID == userID) {
-                                    EntriesFound = true;
-                                    console.log(JSON.stringify(item));
-                                    tblBody += '<tr class="row100 body">' +
-                                        '<td class="cell100 column1">' + item.CustomerName + '</td>' +
-                                        '<td class="cell100 column2">' + item.ServiceLocation + '</td>' +
-                                        '<td class="cell100 column3">' + item.BookedDate + '</td>' +
-                                        '</tr>';
+            if (window.matchMedia("(max-width: 767px)").matches) {
+                isMobileView = true;
+                var tblHead = '<table class="table-responsive"><table class="table table-dark table-striped table-sm table-bordered">' +
+                    '<thead>' +
+                    '   <tr class="row100 head">' +
+                    '       <th class="cell100 column1">Customer Name</th>' +
+                    '       <th class="cell100 column2">Service Location</th>' +
+                    '       <th class="cell100 column3">Booked Date</th>' +
+                    '   </tr>' +
+                    '</thead>';
+                var tblBody = "<tbody>";
+                var EntriesFound = false;
+                querySnapshot.forEach((doc) => {
+                    $("#tblBookedGuideHead").html("");
+                    $("#tblBookedGuideBody").html("");
+                    var AllBookings = doc.data();
+                    AllBookings = AllBookings.BookingDetails;
+                    if (AllBookings)
+                        if (AllBookings.length > 0) {
+                            AllBookings.forEach((item) => {
+                                if (item) {
+                                    if (item.UID == userID) {
+                                        EntriesFound = true;
+                                        console.log(JSON.stringify(item));
+                                        tblBody += '<tr class="row100 body">' +
+                                            '<td class="cell100 column1">' + item.CustomerName + '</td>' +
+                                            '<td class="cell100 column2">' + item.ServiceLocation + '</td>' +
+                                            '<td class="cell100 column3">' + item.BookedDate + '</td>' +
+                                            '</tr>';
+                                    }
+                                } else {
+                                    $(".limiter").addClass("invisible");
+                                    var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
+                                    $("#divViewBookings").html(NoDataFoundHTML);
+                                    console.log("No data Found");
                                 }
-                            } else {
-                                $(".limiter").addClass("invisible");
-                                var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
-                                $("#divViewBookings").html(NoDataFoundHTML);
-                                console.log("No data Found");
-                            }
-                        });
-                    }
-            });
-            tblBody += '</tbody>' +
-                ' </table>' +
-                ' <div class="ps__rail-x" style="left: 0px; bottom: 0px;">' +
-                '   <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>' +
-                ' </div>';
+                            });
+                        }
+                });
+                tblBody += '</tbody>' +
+                    ' </table>' +
+                    ' <div class="ps__rail-x" style="left: 0px; bottom: 0px;">' +
+                    '   <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>' +
+                    ' </div>';
 
+            } else {
+                var tblHead = '<table>' +
+                    '<thead>' +
+                    '   <tr class="row100 head">' +
+                    '       <th class="cell100 column1">Customer Name</th>' +
+                    '       <th class="cell100 column2">Service Location</th>' +
+                    '       <th class="cell100 column3">Booked Date</th>' +
+                    '   </tr>' +
+                    '</thead>' +
+                    '</table>';
+                var tblBody = " <table><tbody>";
+                var EntriesFound = false;
+                querySnapshot.forEach((doc) => {
+                    $("#tblBookedGuideHead").html("");
+                    $("#tblBookedGuideBody").html("");
+                    var AllBookings = doc.data();
+                    AllBookings = AllBookings.BookingDetails;
+                    if (AllBookings)
+                        if (AllBookings.length > 0) {
+                            $(".limiter").removeClass("invisible");
+                            AllBookings.forEach((item) => {
+                                if (item) {
+                                    if (item.UID == userID) {
+                                        EntriesFound = true;
+                                        console.log(JSON.stringify(item));
+                                        tblBody += '<tr class="row100 body">' +
+                                            '<td class="cell100 column1">' + item.CustomerName + '</td>' +
+                                            '<td class="cell100 column2">' + item.ServiceLocation + '</td>' +
+                                            '<td class="cell100 column3">' + item.BookedDate + '</td>' +
+                                            '</tr>';
+                                    }
+                                } else {
+                                    $(".limiter").addClass("invisible");
+                                    var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
+                                    $("#divViewBookings").html(NoDataFoundHTML);
+                                    console.log("No data Found");
+                                }
+                            });
+                        }
+                });
+                tblBody += '</tbody>' +
+                    ' </table>' +
+                    ' <div class="ps__rail-x" style="left: 0px; bottom: 0px;">' +
+                    '   <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>' +
+                    ' </div>';
+            }
             if (EntriesFound) {
-                $("#divViewBookings").html(null);
-                $("#tblBookedGuideHead").html(tblHead);
-                $("#tblBookedGuideBody").html(tblBody);
+                if (isMobileView) {
+                    $("#divViewBookings").html(null);
+                    $("#divMobileViewBookings").html(tblHead + tblBody);
+                } else {
+                    $("#divViewBookings").html(null);
+                    $("#tblBookedGuideHead").html(tblHead);
+                    $("#tblBookedGuideBody").html(tblBody);
+                }
             } else {
                 $(".limiter").addClass("invisible");
                 var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';

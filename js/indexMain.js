@@ -92,8 +92,8 @@ $(function () {
             $("#MobliLogout").removeClass("invisible");
             $("#guidelogin").addClass("invisible");
             $("#Mobguidelogin").addClass("invisible");
-            $("#Username").html("<a>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
-            $("#MobUsername").html("<a>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
+            $("#Username").html("<a  class='nav-link'>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
+            $("#MobUsername").html("<a  class='nav-link'>" + String(userNameOfUser) + "&nbsp;&nbsp;</a>");
             $("#dpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             $("#MobdpPhoto").attr("src", userPhoto).after("<i>&nbsp;</i>");
             var userType = $("#hdnUserType").val();

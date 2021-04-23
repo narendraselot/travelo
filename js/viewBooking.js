@@ -43,47 +43,84 @@ function getLatestBookingData(user) {
             AllBookings = AllBookings.BookingDetails;
             if (AllBookings)
                 if (AllBookings.length > 0) {
-                    $(".limiter").removeClass("invisible");
-                    var tblHead = '<table>' +
-                        '<thead>' +
-                        '   <tr class="row100 head">' +
-                        '       <th class="cell100 column1">Agency Name</th>' +
-                        '       <th class="cell100 column2">Contact</th>' +
-                        '       <th class="cell100 column3">Location</th>' +
-                        '       <th class="cell100 column4">Date</th>' +
-                        '       <th class="cell100 column5">Email</th>' +
+                    if (window.matchMedia("(max-width: 767px)").matches) {
+                        var tblHead = '<div class="table-responsive"><table class="table table-dark table-striped table-sm table-bordered">' +
+                            '<thead>' +
+                            '   <tr class="row100 head">' +
+                            '       <th class="cell100 column1">Agency Name</th>' +
+                            '       <th class="cell100 column2">Contact</th>' +
+                            '       <th class="cell100 column3">Location</th>' +
+                            '       <th class="cell100 column4">Date</th>' +
+                            '       <th class="cell100 column5">Email</th>' +
+                            '   </tr>' +
+                            '</thead>';
 
-                        '   </tr>' +
-                        '</thead>' +
-                        '</table>';
+                        var tblBody = "<tbody>";
 
-                    var tblBody = " <table><tbody>";
+                        AllBookings.forEach((item) => {
+                            if (item) {
+                                console.log(JSON.stringify(item));
+                                tblBody += '<tr class="row100 body">' +
+                                    '<td class="cell100 column1">' + item.AgencyName + '</td>' +
+                                    '<td class="cell100 column2">' + item.Contact + '</td>' +
+                                    '<td class="cell100 column3">' + item.ServiceLocation + '</td>' +
+                                    '<td class="cell100 column4">' + item.BookedDate + '</td>' +
+                                    '<td class="cell100 column5">' + item.guideEmail + '</td>' +
+                                    '</tr>';
+                            } else {
+                                $(".limiter").addClass("invisible");
+                                var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
+                                $("#divViewBookings").html(NoDataFoundHTML);
+                                console.log("No data Found");
+                            }
+                        });
+                        tblBody += ' </tbody>' +
+                            ' </table>' +
+                            ' </div>';
+                        $("#divMobileTable").html(tblHead + tblBody);
+                    } else {
+                        $(".limiter").removeClass("invisible");
+                        var tblHead = '<table>' +
+                            '<thead>' +
+                            '   <tr class="row100 head">' +
+                            '       <th class="cell100 column1">Agency Name</th>' +
+                            '       <th class="cell100 column2">Contact</th>' +
+                            '       <th class="cell100 column3">Location</th>' +
+                            '       <th class="cell100 column4">Date</th>' +
+                            '       <th class="cell100 column5">Email</th>' +
 
-                    AllBookings.forEach((item) => {
-                        if (item) {
-                            console.log(JSON.stringify(item));
-                            tblBody += '<tr class="row100 body">' +
-                                '<td class="cell100 column1">' + item.AgencyName + '</td>' +
-                                '<td class="cell100 column2">' + item.Contact + '</td>' +
-                                '<td class="cell100 column3">' + item.ServiceLocation + '</td>' +
-                                '<td class="cell100 column4">' + item.BookedDate + '</td>' +
-                                '<td class="cell100 column5">' + item.guideEmail + '</td>' +
-                                '</tr>';
-                        } else {
-                            $(".limiter").addClass("invisible");
-                            var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
-                            $("#divViewBookings").html(NoDataFoundHTML);
-                            console.log("No data Found");
-                        }
-                    });
-                    tblBody += ' </tbody>' +
-                        ' </table>' +
-                        ' <div class="ps__rail-x" style="left: 0px; bottom: 0px;">' +
-                        '   <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>' +
-                        ' </div>';
+                            '   </tr>' +
+                            '</thead>' +
+                            '</table>';
 
-                    $("#tblBookedGuideHead").html(tblHead);
-                    $("#tblBookedGuideBody").html(tblBody);
+                        var tblBody = " <table><tbody>";
+
+                        AllBookings.forEach((item) => {
+                            if (item) {
+                                console.log(JSON.stringify(item));
+                                tblBody += '<tr class="row100 body">' +
+                                    '<td class="cell100 column1">' + item.AgencyName + '</td>' +
+                                    '<td class="cell100 column2">' + item.Contact + '</td>' +
+                                    '<td class="cell100 column3">' + item.ServiceLocation + '</td>' +
+                                    '<td class="cell100 column4">' + item.BookedDate + '</td>' +
+                                    '<td class="cell100 column5">' + item.guideEmail + '</td>' +
+                                    '</tr>';
+                            } else {
+                                $(".limiter").addClass("invisible");
+                                var NoDataFoundHTML = '<h3 class="headerFont">No Bookings Made Yet</h3><br><img src="img/Empty.svg" draggable="false" style="height:250px;width:250px;"/>';
+                                $("#divViewBookings").html(NoDataFoundHTML);
+                                console.log("No data Found");
+                            }
+                        });
+                        tblBody += ' </tbody>' +
+                            ' </table>' +
+                            ' <div class="ps__rail-x" style="left: 0px; bottom: 0px;">' +
+                            '   <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>' +
+                            ' </div>';
+
+                        $("#tblBookedGuideHead").html(tblHead);
+                        $("#tblBookedGuideBody").html(tblBody);
+                    }
                 }
         } else {
             $("#tblBookedGuideHead").html("");
