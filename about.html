@@ -25,6 +25,96 @@
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <style>
+        .pad5 {
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .iFramecontainer {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 56.25%;
+            /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+        }
+
+        /* Then style the iframe to fit in the container div with full height and width */
+        .responsive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .invisible {
+            display: none !important;
+            visibility: hidden !important;
+        }
+
+        .popular_destination_area .single_destination {
+            height: 200px;
+            width: 350px;
+        }
+
+        .popular_places_area .single_place .thumb img {
+            width: 100%;
+            height: 225px;
+        }
+
+        .instagram-image img {
+            border-radius: 5px !important;
+        }
+
+        .instagram-image img:hover {
+            box-shadow: 0 1px 5px rgba(245, 242, 242, 0.2);
+        }
+
+
+        .small {
+            font-size: 80%;
+            font-weight: 400;
+        }
+
+        .Wethcard {
+            background-color: #ffffff;
+            border-radius: 50px;
+            color: #6f707d;
+            font-family: 'Marcellus', serif
+        }
+
+        #heading {
+            font-size: 55px;
+            color: #2b304d
+        }
+
+        .Wethtemp {
+            place-items: center
+        }
+
+        .Wethtemp-details>p>span,
+        .Wethgrey {
+            color: #a3acc1;
+            font-size: 12px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .Wethfa {
+            color: #a5a5b1
+        }
+
+        *:focus {
+            outline: none
+        }
+
+        .flex-grow-1 {
+            -ms-flex-positive: 1 !important;
+            flex-grow: 1 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -134,18 +224,16 @@
                             <div class="col-12">
                                 <nav class="navbar navbar-expand-md bg-dark navbar-dark invisible" id='navMobileNav'>
                                     <div class="row">
-                                        <div class="col-8">
-                                            <a class="navbar-brand" href="#">
-                                                <img data-cfsrc="img/TouristLogo.png" alt=""
-                                                    src="http://localhost/travelo/img/TouristLogo.png">
-                                            </a>
-                                        </div>
                                         <div class="col-4">
                                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                                 data-target="#collapsibleNavbar">
                                                 <span class="navbar-toggler-icon"></span>
                                             </button>
-
+                                        </div>
+                                        <div class="col-8">
+                                            <a class="navbar-brand" href="#">
+                                                <img data-cfsrc="img/TouristLogo.png" alt="" src="img/TouristLogo.png">
+                                            </a>
                                         </div>
                                         <div class="col-12">
                                             <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -170,33 +258,30 @@
         <div class='col-lg-4 col-md-8 col-sm-12 text-center'>
             <form>
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-12 col-md-10 col-lg-10">
-                                <input class='form-control' input='number' id='txtPhoneNumber' maxlength="10"
-                                    minlength="10" placeholder='Mobile Number (+91)'></input>
-                            </div>
-                            <div class="col-sm-12 col-md-2 col-lg-2">
-                                <div id='captchaContainer'></div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-6">
-                                <button id="btnSendOTP" class='btn btn-primary' type='button'>
-                                    Send OTP <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                </button>
-                            </div>
-
-                        </div>
-
+                    <div class="col-sm-12 col-md-12 col-lg-12 pad5">
+                        <input class='form-control' input='number' id='txtPhoneNumber' maxlength="10" minlength="10"
+                            placeholder='Mobile Number (+91)'></input>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 pad5">
+                        <input class='form-control' input='Name' id='txtName' placeholder='Name'></input>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 pad5">
+                        <div id='captchaContainer'></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 pad5">
+                        <button id="btnSendOTP" class='float-left btn btn-primary' type='button'>
+                            Send OTP <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </form>
             <br>
             <form>
                 <div class="row">
-                    <div class="col-lg-8 col-md-8 col-sm-12">
+                    <div class="col-lg-8 col-md-8 col-sm-12 pad5">
                         <input input='number' id='txtOTP' class='form-control' placeholder='OTP'></input> &nbsp;
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="col-lg-4 col-md-4 col-sm-12 pad5">
                         <button id="btnSignUpUsingNumber" class='btn btn-success' type='button'>
                             Verify <i class="fa fa-check" aria-hidden="true"></i>
                         </button>
@@ -209,7 +294,6 @@
         <div class='col-lg-4 col-md-2 col-sm-12'>&nbsp;</div>
 
     </div>
-
 
 
     <div class="bradcam_area bradcam_bg_3">
