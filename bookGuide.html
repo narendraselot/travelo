@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/slicknav.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
+
 </head>
 
 <body>
@@ -57,11 +58,17 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">home</a></li>                                            
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a class href="travel_destination.html">Destination</a>
+                                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>                                           
+                                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="travel_destination.html">Destination</a>
                                             </li>
-                                            <li><a class href="Emergency.html">EmergencyService</a> </li>                                          
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ViewMyBookings.html">MyBookings</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="Emergency.html">EmergencyService</a>
+                                            </li>                                          
                                             <!-- #### LogIn FormatMenu START #### -->
                                             <li id="login">
                                                 <a style='cursor:pointer' href='index.html'>
@@ -78,9 +85,10 @@
                                             <li id="Username" class='invisible'></li>
                                             <li id="Photo" class='invisible'><img src="" height="35px" width='35px'
                                                     alt="" id="dpPhoto" draggable="false"></li>
-                                            <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                                <a id="btnLogout">Logout</a>
-                                            </li>
+                                                    <li id="liLogout" class='nav-item invisible' style='cursor:pointer'>
+                                                        <a class="nav-link" id="btnLogout"
+                                                            onclick="javascript:logout();">Logout</a>
+                                            </li>                                                  
                                             <!-- #### LogIn FormatMenu STOP #### -->                                        
                                         </ul>
                                     </nav>
@@ -131,6 +139,18 @@
             </div>
         </div>
     </header>
+
+    <div class="bradcam_area bradcam_bg_2" style='height: 80px !important;'>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>Book Guide</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="row text-center" id='divMainBookGuide'>
         <div class='col-lg-2 col-md-2 col-sm-2'>&nbsp;</div>

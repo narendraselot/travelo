@@ -57,29 +57,39 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="index.html">home</a></li>                                            
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a class href="travel_destination.html">Destination</a>
+                                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>                                            
+                                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="travel_destination.html">Destination</a>
                                             </li>
-                                            <li><a class href="ViewGuideBookings.html">View Bookings</a>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="ViewGuideBookings.html">ViewBookings</a>
                                             </li>
-                                            <li><a class href="Emergency.html">EmergencyService</a>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="Emergency.html">EmergencyService</a>
+                                            </li>
                                             <!-- #### LogIn FormatMenu START #### -->
-                                            <li id="login"><a style='cursor:pointer' id="btnLogin"
-                                                    onclick="login()">Login</a></li>
-                                            <li id="guidelogin" class='invisible'>
-                                                <a style='cursor:pointer' id="btnGuideLogin" onclick="guideSignIn()">
-                                                    Guide Login
+                                            <li id="Username" class='nav-item  invisible'></li>
+                                            <li id="Photo" class='nav-item invisible'>
+                                                <img alt="Profile" height="35px" width='35px' id="dpPhoto">
+                                            </li>
+                                            <li class="nav-item" id="login">
+                                                <a class="nav-link" style='cursor:pointer' id="btnLogin"
+                                                    onclick="login()">Login
+                                                    &nbsp;&nbsp;
                                                 </a>
                                             </li>
-                                            
+                                            <li id="guidelogin" class='nav-item invisible'>
+                                                <a class="nav-link" style='cursor:pointer' id="btnGuideLogin"
+                                                    onclick="guideSignIn()">
+                                                    Guide&nbsp;Login &nbsp;
+                                                </a>
+                                            </li>
+                                            <li id="liLogout" class='nav-item invisible' style='cursor:pointer'>
+                                                <a class="nav-link" id="btnLogout"
+                                                    onclick="javascript:logout();">Logout</a>
+                                            </li>
                                             <input type="hidden" id="hdnUserType">
-                                            <li id="Username" class='invisible'></li>
-                                            <li id="Photo" class='invisible'><img src="" height="35px" width='35px'
-                                                    alt="" id="dpPhoto" draggable="false"></li>
-                                                    <li id="liLogout" class='invisible' style='cursor:pointer'>
-                                                        <a id="btnLogout">Logout</a>
-                                                    </li>
                                             <!-- #### LogIn FormatMenu STOP #### -->
 
                                            
